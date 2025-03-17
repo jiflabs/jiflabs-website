@@ -1,30 +1,29 @@
+import Footer from '@/component/footer/footer';
+import Header from '@/component/header/header';
 import type {Metadata} from 'next';
-import {Geist, Geist_Mono} from 'next/font/google';
+import {Geist} from 'next/font/google';
 import React from 'react';
 import './globals.scss';
 
-const geistSans = Geist({
+const fontGeist = Geist({
     variable: '--font-geist-sans',
     subsets: ['latin'],
 });
 
-const geistMono = Geist_Mono({
-    variable: '--font-geist-mono',
-    subsets: ['latin'],
-});
-
 export const metadata: Metadata = {
-    title: 'JIFLABS',
-    description: 'You wont get more JIF anywhere else!',
+    title: 'JIFLabs',
+    description: 'You wont get any more JIF anywhere else!',
 };
 
 export default function RootLayout(
     {children}: Readonly<{ children: React.ReactNode; }>,
 ) {
     return (
-        <html lang="en">
-        <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <html lang="de">
+        <body className={`${fontGeist.variable}`}>
+        <Header/>
         {children}
+        <Footer/>
         </body>
         </html>
     );

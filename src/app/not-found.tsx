@@ -8,7 +8,7 @@ export default async function NotFound() {
                 <h1>404</h1>
                 <h3>Page Not Found</h3>
             </div>
-            <Link href={'/'}>Go Back</Link>
+            <Link href={'/'}>Go Home</Link>
         </main>
     );
 }

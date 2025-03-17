@@ -4,14 +4,29 @@ import styles from './footer.module.scss';
 export default async function Footer() {
     return (
         <footer className={styles.footer}>
-            <section className={styles.essential}>
-                <p><Link href={'/imprint'}>Imprint</Link></p>
-                <p><Link href={'/privacy'}>Privacy Policy</Link></p>
-                <p><Link href={'/'}>&copy; 2025 jiflabs.de</Link></p>
+            <section className={styles.links}>
+                <p>Essentials</p>
+                <nav>
+                    <Link href={'/imprint'}>Impressum</Link>
+                    <Link href={'/privacy'}>Datenschutz</Link>
+                    <Link href={'/'}>&copy; 2025 jiflabs.de</Link>
+                </nav>
             </section>
             <section className={styles.links}>
-                Links
-                <nav></nav>
+                <p>Foo</p>
+                <nav>
+                    <Link href={'/'}>Bar 1</Link>
+                    <Link href={'/'}>Bar 2</Link>
+                    <Link href={'/'}>Bar 3</Link>
+                </nav>
+            </section>
+            <section className={styles.links}>
+                <p>Links</p>
+                <nav>
+                    <Link href={'/'}>Link 1</Link>
+                    <Link href={'/'}>Link 2</Link>
+                    <Link href={'/'}>Link 3</Link>
+                </nav>
             </section>
         </footer>
     );

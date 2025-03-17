@@ -1,35 +1,90 @@
-.header {
+header.header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
   background: var(--color-secondary);
   width: 100%;
   padding: 2rem;
   margin-bottom: 2rem;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 0 0 1rem 2rem;
+  z-index: 10;
 
-  & nav {
+  @media (max-width: 767px) {
+    padding: 1rem;
+
+    &.open {
+      align-items: flex-start;
+    }
+  }
+}
+
+a.home {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+
+  img {
+    width: auto;
+    height: 4rem;
+  }
+
+  @media (max-width: 767px) {
+    img {
+      height: 2rem;
+    }
+  }
+}
+
+div.right {
+  div {
+    button {
+      display: none;
+    }
+
+    @media (max-width: 767px) {
+      button {
+        display: unset;
+      }
+    }
+  }
+
+  ul {
     display: flex;
     flex-flow: row nowrap;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
+    list-style: none;
+    gap: 1rem;
 
     & a {
-      display: flex;
-      flex-flow: row nowrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
+      display: inline-block;
+    }
+  }
 
-      & img {
-        width: auto;
-        height: 4rem;
+  @media (max-width: 767px) {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: flex-end;
+    gap: 1rem;
+
+    &.close {
+      ul {
+        display: none;
       }
     }
 
-    & ul {
-      display: flex;
-      flex-flow: row nowrap;
-      justify-content: space-between;
-      align-items: center;
-      list-style: none;
-      gap: 1rem;
+    &.open {
+      ul {
+        flex-flow: column nowrap;
+        align-items: flex-end;
+      }
     }
   }
 }
