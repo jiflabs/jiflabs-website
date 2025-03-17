@@ -66,6 +66,10 @@ div.right {
     & a {
       display: inline-block;
     }
+
+    li {
+      margin: 0;
+    }
   }
 
   @media (max-width: 767px) {
