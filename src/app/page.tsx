@@ -1,8 +1,8 @@
-import Container from '@/component/container/container';
+import Container from "@/component/container/container";
 
 export default function Home() {
     return (
-        <Container as={'main'}>
+        <Container as="main">
             <h1>Überschrift 1</h1>
             <h2>Überschrift 2</h2>
             <p>

@@ -1,13 +1,13 @@
-import BlogSwiper from '@/component/blog-swiper/blog-swiper';
-import Container from '@/component/container/container';
-import {queryResource} from '@/util/api';
-import {BlogItem} from '@/util/type';
+import BlogSwiper from "@/component/blog-swiper/blog-swiper";
+import Container from "@/component/container/container";
+import {queryResource} from "@/util/api";
+import {BlogItem} from "@/util/type";
 
-export default async function BlogPage() {
-    const items = await queryResource<BlogItem>('blog');
+export default async function Page() {
+    const items = await queryResource<BlogItem>("blog");
 
     return (
-        <Container as={'main'}>
+        <Container as="main">
             <h1>Blog</h1>
             <h2>Projekte, Gedanken und Informationen</h2>
             <p>
@@ -25,3 +25,5 @@ export default async function BlogPage() {
         </Container>
     );
 }
+
+export const dynamic = "force-dynamic";

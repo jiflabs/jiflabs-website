@@ -20,6 +20,7 @@ html,
 body {
   max-width: 100vw;
   min-height: 100vh;
+  hyphens: auto;
 
   --swiper-theme-color: var(--color-active);
 }
@@ -102,9 +103,11 @@ h2 {
   align-items: center;
   justify-content: flex-start;
   gap: 1rem;
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: bold;
+}
 
+h1 + h2 {
   &:before {
     display: inline-block;
     content: "";
@@ -123,17 +126,17 @@ h2 {
 }
 
 h3 {
-  font-size: 2rem;
+  font-size: 1.7rem;
   font-weight: bold;
 }
 
 h4 {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   font-weight: bold;
 }
 
 h5 {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: bold;
 }
 

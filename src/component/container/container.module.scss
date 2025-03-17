@@ -5,3 +5,11 @@
   margin: 0 auto;
   width: 80%;
 }
+
+.slim {
+  width: 50%;
+
+  @media (max-width: 767px) {
+    width: 80%;
+  }
+}

@@ -1,7 +1,7 @@
-import {BlogItem, Query, QueryArray} from '@/util/type';
+import {BlogItem, Query, QueryArray} from "@/util/type";
 
 export async function POST(request: Request): Promise<Response> {
-    const response = await fetch('https://api.vercel.app/blog');
+    const response = await fetch("https://api.vercel.app/blog");
     const blogs = await response.json() as BlogItem[];
     const {offset, count}: Query = await request.json();
     const data: QueryArray<BlogItem> = {
@@ -10,3 +10,9 @@ export async function POST(request: Request): Promise<Response> {
     };
     return Response.json(data);
 }
+
+
+/*
+* [id]  ---> GET
+* query ---> POST (count, offset)
+*/
