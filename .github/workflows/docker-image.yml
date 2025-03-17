@@ -14,5 +14,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+
     - name: Build the Docker image
-      run: docker build . -t jiflabs-website:$(date +%s)
+      run: docker build -t jiflabs/website:latest .
+
+    - name: Deploy the Docker image
+      run: docker login && docker push jiflabs/website:latest
