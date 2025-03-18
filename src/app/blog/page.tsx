@@ -2,6 +2,12 @@ import BlogSwiper from "@/component/blog-swiper/blog-swiper";
 import Container from "@/component/container/container";
 import {queryResource} from "@/util/api";
 import {BlogItem} from "@/util/type";
+import {Metadata} from "next";
+
+export const metadata: Metadata = {
+    title: "Blog",
+    description: "Der Blog",
+};
 
 export default async function Page() {
     const items = await queryResource<BlogItem>("blog");

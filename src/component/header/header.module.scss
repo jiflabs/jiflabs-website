@@ -55,7 +55,7 @@ div.right {
     }
   }
 
-  ul {
+  nav ul {
     display: flex;
     flex-flow: row nowrap;
     justify-content: flex-end;
@@ -76,16 +76,17 @@ div.right {
     display: flex;
     flex-flow: column nowrap;
     align-items: flex-end;
-    gap: 1rem;
 
     &.close {
-      ul {
+      nav ul {
         display: none;
       }
     }
 
     &.open {
-      ul {
+      gap: 1rem;
+
+      nav ul {
         flex-flow: column nowrap;
         align-items: flex-end;
       }

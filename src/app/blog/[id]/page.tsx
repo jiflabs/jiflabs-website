@@ -1,6 +1,18 @@
 import Container from "@/component/container/container";
 import {fetchResource} from "@/util/api";
 import {BlogItem} from "@/util/type";
+import {Metadata} from "next";
+
+export async function generateMetadata({params}: { params: Promise<{ id: string }> }): Promise<Metadata> {
+    const {id} = await params;
+    const blog = await fetchResource<BlogItem>("blog", id);
+
+    return {
+        title: blog.title,
+        authors: [{name: blog.author}],
+        description: blog.content.slice(0, 50) + "...",
+    };
+}
 
 export default async function Page({params}: { params: Promise<{ id: string }> }) {
 

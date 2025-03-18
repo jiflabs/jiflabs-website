@@ -1,4 +1,10 @@
 import Container from "@/component/container/container";
+import {Metadata} from "next";
+
+export const metadata: Metadata = {
+    title: "Datenschutzerklärung",
+    description: "Die Datenschutzerklärung",
+};
 
 export default async function Page() {
     return (
@@ -16,21 +22,21 @@ export default async function Page() {
             <p>Verantwortlich für die Datenverarbeitung auf dieser Website sind:</p>
 
             <p>
-                [Vorname Nachname 1]<br/>
-                [Adresse 1]<br/>
-                [E-Mail-Adresse 1]
+                Jonas Nicklas<br/>
+                Adresse<br/>
+                E-Mail
             </p>
 
             <p>
-                [Vorname Nachname 2]<br/>
-                [Adresse 2]<br/>
-                [E-Mail-Adresse 2]
+                Ilian Odenbach<br/>
+                Adresse<br/>
+                E-Mail
             </p>
 
             <p>
-                [Vorname Nachname 3]<br/>
-                [Adresse 3]<br/>
-                [E-Mail-Adresse 3]
+                Felix Schreiber<br/>
+                Adresse<br/>
+                E-Mail
             </p>
 
             <h2>3. Erhebung und Speicherung personenbezogener Daten sowie Art und Zweck von deren Verwendung</h2>
@@ -92,7 +98,8 @@ export default async function Page() {
 
             <h2>8. Aktualität und Änderung dieser Datenschutzerklärung</h2>
             <p>
-                Diese Datenschutzerklärung ist aktuell gültig und hat den Stand [Monat Jahr]. Wir behalten uns vor,
+                Diese Datenschutzerklärung ist aktuell gültig und hat den
+                Stand <time dateTime="2025-03-01">März 2025</time>. Wir behalten uns vor,
                 diese Erklärung bei Bedarf zu aktualisieren.
             </p>
         </Container>
