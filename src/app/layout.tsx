@@ -11,8 +11,15 @@ const fontGeist = Geist({
 });
 
 export const metadata: Metadata = {
-    title: "JIFLabs",
-    description: "You wont get any more JIF anywhere else!",
+    title: {
+        template: "JIFLabs | %s",
+        default: "JIFLabs",
+    },
+    authors: [{name: "Felix Schreiber"}],
+    creator: "Felix Schreiber",
+    generator: "Next.js",
+    keywords: ["jif", "jiflabs", "jiflabsde"],
+    description: "Die offizielle JIFLabs Website",
 };
 
 export default function RootLayout(

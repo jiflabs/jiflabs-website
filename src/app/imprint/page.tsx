@@ -1,4 +1,10 @@
 import Container from "@/component/container/container";
+import {Metadata} from "next";
+
+export const metadata: Metadata = {
+    title: "Impressum",
+    description: "Das Impressum",
+};
 
 export default async function Page() {
     return (
