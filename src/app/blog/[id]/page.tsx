@@ -1,5 +1,6 @@
 import Container from "@/component/container/container";
 import {fetchResource} from "@/util/api";
+import {formatDate} from "@/util/date";
 import {BlogItem} from "@/util/type";
 import {Metadata} from "next";
 
@@ -24,7 +25,7 @@ export default async function Page({params}: { params: Promise<{ id: string }> }
             <h1>{blog.title}</h1>
             <h2>by {blog.author}</h2>
             <h3>in {blog.category}</h3>
-            <time dateTime={blog.date}><h4>{new Date(blog.date).toLocaleDateString()}</h4></time>
+            <time dateTime={blog.date}><h4>{formatDate(blog.date)}</h4></time>
             {blog.content}
         </Container>
     );
