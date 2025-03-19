@@ -10,9 +10,3 @@ export async function POST(request: Request): Promise<Response> {
     };
     return Response.json(data);
 }
-
-
-/*
-* [id]  ---> GET
-* query ---> POST (count, offset)
-*/

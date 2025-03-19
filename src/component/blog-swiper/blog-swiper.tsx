@@ -1,5 +1,6 @@
 "use client";
 
+import {formatDate} from "@/util/date";
 import {BlogItem, QueryArray} from "@/util/type";
 import Link from "next/link";
 import React from "react";
@@ -19,7 +20,7 @@ function Slide({id, title, author, date, category, content}: BlogItem) {
             <h3>{title}</h3>
             <h4>{author}</h4>
             <h5>{category}</h5>
-            <time dateTime={date}><h6>{new Date(date).toLocaleDateString()}</h6></time>
+            <time dateTime={date}><h6>{formatDate(date)}</h6></time>
             <div>{content.slice(0, 50) + "..."}</div>
             <div className={styles.link}>
                 <Link href={`/blog/${id}`} title={`'${title}', ${author}`}>
