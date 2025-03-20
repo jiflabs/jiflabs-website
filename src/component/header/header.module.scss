@@ -4,9 +4,10 @@ header.header {
   left: 0;
   right: 0;
   background: var(--color-secondary);
+  box-shadow: var(--color-active) 0 0 2rem;
   width: 100%;
   padding: 2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
@@ -16,10 +17,7 @@ header.header {
 
   @media (max-width: 767px) {
     padding: 1rem;
-
-    &.open {
-      align-items: flex-start;
-    }
+    align-items: flex-start;
   }
 }
 
