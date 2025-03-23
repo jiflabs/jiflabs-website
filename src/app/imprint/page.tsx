@@ -1,4 +1,4 @@
-import Container from "@/component/container/container";
+import {Main} from "@/component/container/container";
 import {Metadata} from "next";
 
 export const metadata: Metadata = {
@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default async function Page() {
     return (
-        <Container as="main" slim>
+        <Main slim>
             <h1>Impressum</h1>
 
             <h2>Rechtliche Hinweise</h2>
@@ -61,6 +61,6 @@ export default async function Page() {
                 Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen
                 Urheberrecht.
             </p>
-        </Container>
+        </Main>
     );
 }

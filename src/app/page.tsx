@@ -1,8 +1,8 @@
-import Container from "@/component/container/container";
+import {Main} from "@/component/container/container";
 
 export default function Home() {
     return (
-        <Container as="main">
+        <Main>
             <h1>Überschrift 1</h1>
             <h2>Überschrift 2</h2>
             <p>
@@ -156,6 +156,6 @@ export default function Home() {
                 sagrisch guad des is hoid aso measi im Beidl Kaiwe i daad Reiwadatschi am acht’n Tag schuf Gott des
                 Bia.
             </p>
-        </Container>
+        </Main>
     );
 }

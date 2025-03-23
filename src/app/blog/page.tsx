@@ -1,5 +1,5 @@
 import BlogSwiper from "@/component/blog-swiper/blog-swiper";
-import Container from "@/component/container/container";
+import {Main} from "@/component/container/container";
 import {queryResource} from "@/util/api";
 import {BlogItem} from "@/util/type";
 import {Metadata} from "next";
@@ -13,7 +13,7 @@ export default async function Page() {
     const items = await queryResource<BlogItem>("blog");
 
     return (
-        <Container as="main">
+        <Main>
             <h1>Blog</h1>
             <h2>Projekte, Gedanken und Informationen</h2>
             <p>
@@ -28,7 +28,7 @@ export default async function Page() {
                 midananda hea ham. Amoi is ma Wuascht Sauakraud, d’.
             </p>
             <BlogSwiper items={items}/>
-        </Container>
+        </Main>
     );
 }
 

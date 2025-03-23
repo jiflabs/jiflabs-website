@@ -1,4 +1,4 @@
-import Container from "@/component/container/container";
+import {Main} from "@/component/container/container";
 import {Metadata} from "next";
 
 export const metadata: Metadata = {
@@ -8,8 +8,8 @@ export const metadata: Metadata = {
 
 export default async function Page() {
     return (
-        <Container as="main">
+        <Main>
             <h1>Login</h1>
-        </Container>
+        </Main>
     );
 }
