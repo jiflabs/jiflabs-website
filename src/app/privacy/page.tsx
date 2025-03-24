@@ -1,4 +1,4 @@
-import Container from "@/component/container/container";
+import {Main} from "@/component/container/container";
 import {Metadata} from "next";
 
 export const metadata: Metadata = {
@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default async function Page() {
     return (
-        <Container as="main" slim>
+        <Main slim>
             <h1>Datenschutzerklärung</h1>
 
             <h2>1. Einleitung</h2>
@@ -102,6 +102,6 @@ export default async function Page() {
                 Stand <time dateTime="2025-03-01">März 2025</time>. Wir behalten uns vor,
                 diese Erklärung bei Bedarf zu aktualisieren.
             </p>
-        </Container>
+        </Main>
     );
 }

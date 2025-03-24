@@ -19,10 +19,14 @@
   display: flex;
   flex-flow: column nowrap;
   border-radius: 1rem 2rem 1rem 2rem;
-  padding: 3rem;
-  gap: 1rem;
+  padding: 2rem 3rem;
+  gap: 2rem;
 
   & div.link {
     margin-top: auto;
+
+    & a {
+      display: inline-block;
+    }
   }
 }
