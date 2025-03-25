@@ -1,3 +1,5 @@
+"use client";
+
 import {ComponentPropsWithRef, ElementType} from "react";
 
 import styles from "./container.module.scss";
@@ -7,7 +9,7 @@ type Props<E extends ElementType> = {
     slim?: boolean;
 } & ComponentPropsWithRef<E>
 
-export default async function Container<E extends ElementType>(
+export default function Container<E extends ElementType>(
     {
         as: Component,
         slim,
@@ -18,14 +20,14 @@ export default async function Container<E extends ElementType>(
     return <Component className={`${styles.container} ${slim ? styles.slim : ""} ${className ?? ""}`} {...props}/>;
 }
 
-export const Main = async (
+export const Main = (
     {slim, ...props}: Omit<Props<"main">, "as">,
 ) => <Container<"main"> as="main" slim={slim} {...props}/>;
 
-export const Section = async (
+export const Section = (
     {slim, ...props}: Omit<Props<"section">, "as">,
 ) => <Container<"section"> as="section" slim={slim} {...props}/>;
 
-export const Div = async (
+export const Div = (
     {slim, ...props}: Omit<Props<"div">, "as">,
 ) => <Container<"div"> as="div" slim={slim} {...props}/>;

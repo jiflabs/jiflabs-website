@@ -15,7 +15,7 @@ export default async function Footer() {
             <section className={styles.links}>
                 <p>Foo</p>
                 <nav>
-                    <Link href="/">Bar 1</Link>
+                    <Link href="/editor">Markdown Editor</Link>
                     <Link href="/">Bar 2</Link>
                     <Link href="/">Bar 3</Link>
                 </nav>
