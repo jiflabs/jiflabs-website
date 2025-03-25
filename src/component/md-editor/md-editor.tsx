@@ -65,6 +65,9 @@ export default function MDEditor({onSubmit}: Props) {
     //  ![the page favicon](/favicon.ico)
     //
 
+    // <backend>/resources/blob/<id>
+    // ![...](@ilian) -> ![...](<backend>/resources/blob/<id of ilian>)
+
     const [isEditing, setIsEditing] = useState(false);
     const [content, setContent] = useState<string>();
     const [images, setImages] = useState<Image[]>([]);
@@ -151,7 +154,7 @@ export default function MDEditor({onSubmit}: Props) {
             </section>
             <section className={styles.preview}>
                 <Main full>
-                    <Markdown urlTransform={(url) => {
+                    <Markdown urlTransform={url => {
                         if (!url.trim())
                             return null;
                         if (url.startsWith("@") && url.length > 1) {

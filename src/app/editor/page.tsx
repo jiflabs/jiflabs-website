@@ -12,7 +12,15 @@ async function submit(data: Data): Promise<{ success: boolean, message?: string 
 
     console.log(data);
 
-    return {success: true};
+    const response = await fetch(`${process.env.API_ENDPOINT}/resources/blog/create`, {
+        method: "POST",
+        body: JSON.stringify(data),
+    });
+
+    if (response.ok)
+        return {success: true};
+
+    return {success: false, message: response.statusText};
 }
 
 export default async function Page() {

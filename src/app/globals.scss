@@ -50,23 +50,25 @@ main {
   color: inherit;
 }
 
+textarea {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-secondary) transparent;
+}
+
 img, svg {
   border-radius: var(--border-radius);
   max-width: 100%;
+  width: 50%;
   height: auto;
 
-  &:not(:only-child) {
-    width: 50%;
+  &:nth-child(odd) {
+    float: left;
+    margin: 0.5rem 1rem 0.5rem 0;
+  }
 
-    &:nth-child(odd) {
-      float: left;
-      margin: 0.5rem 1rem 0.5rem 0;
-    }
-
-    &:nth-child(even) {
-      float: right;
-      margin: 0.5rem 0 0.5rem 1rem;
-    }
+  &:nth-child(even) {
+    float: right;
+    margin: 0.5rem 0 0.5rem 1rem;
   }
 }
 
