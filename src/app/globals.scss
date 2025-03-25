@@ -4,6 +4,8 @@
   --color-background: #ffffff;
   --color-active: #1552b1;
   --color-link-background: #cccccc;
+
+  --border-radius: 0.5rem 1rem 0.5rem 1rem;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -49,8 +51,23 @@ main {
 }
 
 img, svg {
+  border-radius: var(--border-radius);
   max-width: 100%;
   height: auto;
+
+  &:not(:only-child) {
+    width: 50%;
+
+    &:nth-child(odd) {
+      float: left;
+      margin: 0.5rem 1rem 0.5rem 0;
+    }
+
+    &:nth-child(even) {
+      float: right;
+      margin: 0.5rem 0 0.5rem 1rem;
+    }
+  }
 }
 
 a, button {
@@ -60,7 +77,7 @@ a, button {
   transition: color 0.1s ease-in-out;
   padding: 0.5rem 1rem;
   background: var(--color-link-background);
-  border-radius: 0.5rem 1rem 0.5rem 1rem;
+  border-radius: var(--border-radius);
   outline: none;
 
   &:hover {
