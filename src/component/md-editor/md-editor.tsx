@@ -1,5 +1,7 @@
 "use client";
 
+import {Main} from "@/component/container/client-container";
+import {readBase64} from "@/util/file";
 import {ChangeEventHandler, DetailedHTMLProps, InputHTMLAttributes, ReactNode, useActionState, useState} from "react";
 import Markdown from "react-markdown";
 
@@ -13,14 +15,37 @@ function Input({children, ...props}: InputProps) {
     return (
         <label>
             <strong>{children}</strong>
+            {props.type === "file" ? <span>Dateien auswählen</span> : undefined}
             <input {...props}/>
         </label>
     );
 }
 
-type Status = { success: boolean, message?: string }
+export type Status = {
+    success: boolean,
+    message?: string,
+}
 
-export default function MDEditor() {
+export type Image = {
+    key: string,
+    name: string,
+    value: string,
+}
+
+export type Data = {
+    title: string,
+    tags: string[],
+    category: string,
+    content: string,
+    date: Date,
+    images: Image[],
+}
+
+type Props = {
+    onSubmit: (data: Data) => Promise<Status>;
+}
+
+export default function MDEditor({onSubmit}: Props) {
 
     //
     // Example:
@@ -42,20 +67,29 @@ export default function MDEditor() {
 
     const [isEditing, setIsEditing] = useState(false);
     const [content, setContent] = useState<string>();
+    const [images, setImages] = useState<Image[]>([]);
 
-    const [status, action] = useActionState<Status | undefined, FormData>(async (status, data) => {
-        console.log("state", status);
-        console.log("data", data);
+    const [status, action] = useActionState<Status | undefined, FormData>(async (status, formData) => {
+        const data: Data = {
+            title: formData.get("title") as string,
+            tags: (formData.get("tags") as string).split(/\s+/),
+            category: formData.get("category") as string,
+            content: formData.get("content") as string,
+            date: new Date(),
+            images,
+        };
 
-        data.append("date", new Date().toISOString());
+        const result = await onSubmit(data);
+        if (result.success) {
+            setContent(undefined);
+            setIsEditing(false);
+            setImages([]);
+        }
 
-        setContent(undefined);
-        setIsEditing(false);
-
-        return {success: true};
+        return result;
     }, undefined);
 
-    const handleChange: ChangeEventHandler<HTMLTextAreaElement> = ({currentTarget}) => {
+    const handleContentChange: ChangeEventHandler<HTMLTextAreaElement> = ({currentTarget}) => {
         if (isEditing)
             return;
         setIsEditing(true);
@@ -65,6 +99,22 @@ export default function MDEditor() {
         }, 1000);
     };
 
+    const handleImagesChange: ChangeEventHandler<HTMLInputElement> = ({currentTarget}) => {
+        const files = currentTarget.files;
+        if (!files) return;
+        for (let i = 0; i < files.length; ++i) {
+            const file = files[i];
+            readBase64(file).then(value => setImages(images => Array.from(new Set([
+                ...images,
+                {
+                    key: file.name,
+                    name: file.name,
+                    value,
+                },
+            ]))));
+        }
+    };
+
     return (
         <div className={styles.wrapper}>
             <section className={styles.editor}>
@@ -72,7 +122,18 @@ export default function MDEditor() {
                     <Input type="text" name="title" placeholder="Seitentitel..." required>Titel</Input>
                     <Input type="text" name="tags" placeholder="Schlagwörter..." required>Tags</Input>
                     <Input type="text" name="category" placeholder="Kategorie..." required>Kategorie</Input>
-                    <textarea onChange={handleChange}
+                    <Input type="file" multiple accept="image/*" onChange={handleImagesChange}>Bilder</Input>
+                    {images.length ? <ul className={styles.fileExtra}>
+                        {images.map(({key, name}, index) => <li key={key}>
+                            <input type="text" defaultValue={name} onChange={({currentTarget}) => {
+                                setImages(images => {
+                                    images[index].name = currentTarget.value;
+                                    return images;
+                                });
+                            }}/>
+                        </li>)}
+                    </ul> : undefined}
+                    <textarea onChange={handleContentChange}
                               name="content"
                               placeholder="Inhalt..."
                               required/>
@@ -89,7 +150,19 @@ export default function MDEditor() {
                 </form>
             </section>
             <section className={styles.preview}>
-                {content && <Markdown>{content}</Markdown>}
+                <Main full>
+                    <Markdown urlTransform={(url) => {
+                        if (!url.trim())
+                            return null;
+                        if (url.startsWith("@") && url.length > 1) {
+                            const key = url.slice(1);
+                            return images.find(({name}) => name === key)?.value;
+                        }
+                        return url;
+                    }} skipHtml>
+                        {content}
+                    </Markdown>
+                </Main>
             </section>
         </div>
     );

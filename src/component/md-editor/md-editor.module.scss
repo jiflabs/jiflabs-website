@@ -2,7 +2,7 @@
   display: flex;
   flex-flow: row nowrap;
   align-items: stretch;
-  justify-content: center;
+  justify-content: stretch;
   gap: 2rem;
   width: 100%;
   height: auto;
@@ -15,67 +15,95 @@
 
 .editor, .preview {
   flex-grow: 1;
-  width: 100%;
+  width: 50%;
   height: auto;
   padding: 2rem;
   border-radius: 1rem;
   background-color: var(--color-secondary);
+  overflow: hidden;
+}
 
+.editor {
   & form {
-    width: 100%;
+    width: auto;
     height: 100%;
     display: flex;
     flex-flow: column nowrap;
     gap: 1rem;
+  }
 
-    & .submit {
-      display: flex;
-      flex-flow: row nowrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
+  & .submit {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
 
-      & p {
-        flex-grow: 1;
-        margin: 0;
-      }
+    & p {
+      flex-grow: 1;
+      margin: 0;
+    }
+  }
+
+  & input, textarea {
+    resize: none;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    overflow: auto;
+    background: none;
+    flex-grow: 1;
+    width: auto;
+    height: auto;
+  }
+
+  & label {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+
+    & strong {
+      width: 5rem;
     }
 
-    & *:not(button) {
-      resize: none;
-      background: none;
-      border: none;
-      outline: none;
-      box-shadow: none;
-      overflow: auto;
-    }
-
-    & label {
-      display: flex;
-      flex-flow: row nowrap;
-      gap: 1rem;
-      align-items: center;
-      justify-content: space-between;
-
-      & strong {
-        width: 5rem;
-      }
-
-      & input {
-        flex-grow: 1;
-        border-bottom: 1px solid var(--color-primary);
-        transition: border-bottom-color 0.1s ease-in-out;
-
-        &:hover,
-        &:focus,
-        &:active {
-          border-bottom: 1px solid var(--color-active);
-        }
-      }
-    }
-
-    & textarea {
+    & span {
       flex-grow: 1;
     }
+  }
+
+  & input[type="file"] {
+    display: none;
+  }
+
+  & input[type="text"] {
+    border-bottom: 1px solid var(--color-primary);
+    transition: border-bottom-color 0.1s ease-in-out;
+
+    &:hover,
+    &:focus,
+    &:active {
+      border-bottom: 1px solid var(--color-active);
+    }
+  }
+
+  & textarea {
+    background: var(--color-background);
+    border-radius: 1rem;
+    padding: 0.5rem;
+  }
+}
+
+ul.fileExtra {
+  display: flex;
+  flex-flow: column nowrap;
+  list-style: none;
+  align-items: stretch;
+
+  & li {
+    display: flex;
+    flex-flow: row nowrap;
+    margin: 0;
   }
 }
