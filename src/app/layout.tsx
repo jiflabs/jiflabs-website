@@ -2,7 +2,7 @@ import Footer from "@/component/footer/footer";
 import Header from "@/component/header/header";
 import {config} from "@fortawesome/fontawesome-svg-core";
 import type {Metadata} from "next";
-import {Geist} from "next/font/google";
+import {Fira_Code, Geist} from "next/font/google";
 import React from "react";
 import "./globals.scss";
 import "@fortawesome/fontawesome-svg-core/styles.css";
@@ -11,7 +11,12 @@ config.autoAddCss = false;
 
 const fontGeist = Geist({
     variable: "--font-geist-sans",
-    subsets: ["latin"],
+    subsets: ["latin", "latin-ext"],
+});
+
+const fontFira = Fira_Code({
+    variable: "--font-fira-code",
+    subsets: ["latin", "latin-ext"],
 });
 
 export const metadata: Metadata = {
@@ -31,7 +36,7 @@ export default function RootLayout(
 ) {
     return (
         <html lang="de">
-        <body className={`${fontGeist.variable}`}>
+        <body className={`${fontGeist.variable} ${fontFira.variable}`}>
         <Header/>
         {children}
         <Footer/>

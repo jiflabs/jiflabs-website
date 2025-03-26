@@ -2,15 +2,18 @@
 
 import {Main} from "@/component/container/client-container";
 import {readBase64} from "@/util/file";
+import Highlight from "highlight.js";
 import {
     ChangeEventHandler,
     DetailedHTMLProps,
     FormEventHandler,
     InputHTMLAttributes,
     ReactNode,
+    useEffect,
     useState,
 } from "react";
 import Markdown from "react-markdown";
+import "highlight.js/styles/github-dark.css";
 
 import styles from "./md-editor.module.scss";
 
@@ -99,26 +102,32 @@ export default function MDEditor({onSubmit}: Props) {
         }
     };
 
+    useEffect(() => {
+        Highlight.highlightAll();
+
+        return () => {
+            [...document.getElementsByTagName("code")]
+                .forEach(code => code.removeAttribute("data-highlighted"));
+        };
+    }, [content]);
+
     return (
         <div className={styles.wrapper}>
             <section className={styles.editor}>
                 <form onSubmit={handleSubmit}>
                     <Input type="text"
-                           name="title"
                            placeholder="Seitentitel..."
                            required
                            onChange={({currentTarget}) => setTitle(currentTarget.value)}>
                         Titel
                     </Input>
                     <Input type="text"
-                           name="tags"
                            placeholder="Schlagwörter..."
                            required
                            onChange={({currentTarget}) => setTags(currentTarget.value)}>
                         Tags
                     </Input>
                     <Input type="text"
-                           name="category"
                            placeholder="Kategorie..."
                            required
                            onChange={({currentTarget}) => setCategory(currentTarget.value)}>
@@ -140,8 +149,8 @@ export default function MDEditor({onSubmit}: Props) {
                             }}/>
                         </li>)}
                     </ul> : undefined}
-                    <textarea name="content"
-                              placeholder="Inhalt..."
+                    <textarea spellCheck={false}
+                              autoFocus={true}
                               required
                               onChange={({currentTarget}) => setContent(currentTarget.value)}/>
                     <div className={styles.submit}>
