@@ -4,6 +4,8 @@
   --color-background: #ffffff;
   --color-active: #1552b1;
   --color-link-background: #cccccc;
+
+  --border-radius: 0.5rem 1rem 0.5rem 1rem;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -48,9 +50,19 @@ main {
   color: inherit;
 }
 
+textarea {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-secondary) transparent;
+}
+
 img, svg {
+  border-radius: var(--border-radius);
   max-width: 100%;
-  height: auto;
+}
+
+p > img, p > svg {
+  width: 50%;
+  float: left;
 }
 
 a, button {
@@ -60,7 +72,7 @@ a, button {
   transition: color 0.1s ease-in-out;
   padding: 0.5rem 1rem;
   background: var(--color-link-background);
-  border-radius: 0.5rem 1rem 0.5rem 1rem;
+  border-radius: var(--border-radius);
   outline: none;
 
   &:hover {
@@ -71,6 +83,12 @@ a, button {
   &:active {
     color: var(--color-active);
   }
+}
+
+p > a {
+  padding: 0;
+  background: none;
+  text-decoration: underline;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -157,4 +175,9 @@ li {
 
 p {
   margin-bottom: 0.5rem;
+}
+
+code {
+  font-family: var(--font-fira-code), monospace;
+  border-radius: var(--border-radius);
 }

@@ -1,0 +1,78 @@
+```c
+#include "stdio.h"
+
+typedef struct node node_t;
+
+struct node {
+  node_t* next;
+  void* data;
+}
+
+void node_init(node_t* self, node_t* next, void* data) {
+  self->next = next;
+  self->data = data;
+}
+
+void* node_get(node_t* self, unsigned index) {
+  if (!index)
+    return self->data;
+  if (self->next)
+    return node_get(self->next, index - 1);
+  return NULL;
+}
+
+void node_set(node_t* self, unsigned index, void* data) {
+  if (!index) {
+    self->data = data;
+    return;
+  }
+  if (self->next) {
+    node_set(self->next, index - 1, data);
+    return;
+  }
+}
+
+void node_push(node_t* self, node_t* other) {
+  if (self->next) {
+    node_push(self->next, other);
+    return;
+  }
+  self->next = other;
+}
+
+node_t* node_pop(node_t* self) {
+  if (self->next) {
+    self->next = node_pop(self->next);
+    return self;
+  }
+  return NULL;
+}
+
+node_t* node_back(node_t* self) {
+  if (self->next)
+    return node_back(self->next);
+  return self;
+}
+
+int main(int argc, const char** argv) {
+  fprintf(stdout, "Hello World!");
+}
+```
+
+Dieser Code implementiert eine einfach verlinkte Liste mit folgenden Funktionen:
+
+```txt
++-----------+-----------------------------------------------------------------------+
+| Name      | Beschreibung                                                          |
++-----------+-----------------------------------------------------------------------+
+| node_init | Initialisiert einen Listenknoten                                      |
++-----------+-----------------------------------------------------------------------+
+| node_get  | Holt die Daten aus einen Listenknoten bei index, gezählt von self     |
++-----------+-----------------------------------------------------------------------+
+| node_set  | Setzt die Daten in einem Listenknoten bei index, gezählt von self     |
++-----------+-----------------------------------------------------------------------+
+| node_push | Fügt einen Knoten am Ende der Liste an                                |
++-----------+-----------------------------------------------------------------------+
+| node_pop  | Entfernt den Knoten vom Ende der Liste                                |
++-----------+-----------------------------------------------------------------------+
+```

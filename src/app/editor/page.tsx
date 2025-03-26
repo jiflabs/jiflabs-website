@@ -10,9 +10,15 @@ export const metadata: Metadata = {
 async function submit(data: Data): Promise<{ success: boolean, message?: string }> {
     "use server";
 
-    console.log(data);
+    const response = await fetch(`${process.env.API_ENDPOINT}/resource/blog/create`, {
+        method: "POST",
+        body: JSON.stringify(data),
+    });
 
-    return {success: true};
+    if (response.ok)
+        return {success: true};
+
+    return {success: false, message: response.statusText};
 }
 
 export default async function Page() {
