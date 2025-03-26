@@ -58,18 +58,11 @@ textarea {
 img, svg {
   border-radius: var(--border-radius);
   max-width: 100%;
+}
+
+p > img, p > svg {
   width: 50%;
-  height: auto;
-
-  &:nth-child(odd) {
-    float: left;
-    margin: 0.5rem 1rem 0.5rem 0;
-  }
-
-  &:nth-child(even) {
-    float: right;
-    margin: 0.5rem 0 0.5rem 1rem;
-  }
+  float: left;
 }
 
 a, button {
@@ -90,6 +83,12 @@ a, button {
   &:active {
     color: var(--color-active);
   }
+}
+
+p > a {
+  padding: 0;
+  background: none;
+  text-decoration: underline;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -176,4 +175,54 @@ li {
 
 p {
   margin-bottom: 0.5rem;
+}
+
+.ql-snow {
+  .ql-editor {
+    a {
+      color: inherit !important;
+      border-radius: 0;
+    }
+
+    h1, h2, h3, h4, h5, h6, p {
+      margin-bottom: 0.5rem;
+    }
+
+    h1 {
+      font-size: 3rem !important;
+    }
+
+    h2 {
+      font-size: 2rem !important;
+    }
+
+    h3 {
+      font-size: 1.7rem !important;
+    }
+
+    h4 {
+      font-size: 1.4rem !important;
+    }
+
+    h5 {
+      font-size: 1.1rem !important;
+    }
+
+    h6 {
+      font-size: 1rem !important;
+    }
+  }
+
+  .ql-tooltip {
+    a {
+      color: inherit !important;
+      background: none;
+      padding: 0;
+      border-radius: 0;
+    }
+
+    input[type="text"] {
+      color: revert;
+    }
+  }
 }
