@@ -1,4 +1,5 @@
 import {Main} from "@/component/container/container";
+import {DefaultStrings} from "@/lang/lang";
 import {fetchResource} from "@/util/api";
 import {formatDate} from "@/util/date";
 import {BlogItem} from "@/util/type";
@@ -24,7 +25,7 @@ export default async function Page({params}: { params: Promise<{ id: string }> }
         <Main>
             <div>
                 <h1>{blog.title}</h1>
-                <h2>by {blog.author}</h2>
+                <h2>{DefaultStrings.page.blog.by} {blog.author}</h2>
                 <h3>in {blog.category}</h3>
                 <time dateTime={blog.date}><h4>{formatDate(blog.date)}</h4></time>
             </div>

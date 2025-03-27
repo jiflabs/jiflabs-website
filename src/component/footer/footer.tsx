@@ -1,14 +1,16 @@
+import {DefaultStrings} from "@/lang/lang";
 import Link from "next/link";
+
 import styles from "./footer.module.scss";
 
 export default async function Footer() {
     return (
         <footer className={styles.footer}>
             <section className={styles.links}>
-                <p>Essentials</p>
+                <p>{DefaultStrings.footer.essentials}</p>
                 <nav>
-                    <Link href="/imprint">Impressum</Link>
-                    <Link href="/privacy">Datenschutz</Link>
+                    <Link href="/imprint">{DefaultStrings.page.imprint.title}</Link>
+                    <Link href="/privacy">{DefaultStrings.page.privacy.title}</Link>
                     <Link href="/">&copy; 2025 jiflabs.de</Link>
                 </nav>
             </section>

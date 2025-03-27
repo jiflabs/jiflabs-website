@@ -1,4 +1,11 @@
 import {Main} from "@/component/container/container";
+import {DefaultStrings} from "@/lang/lang";
+import {Metadata} from "next";
+
+export const metadata: Metadata = {
+    title: "JIFLabs | " + DefaultStrings.page.home.title,
+    description: DefaultStrings.page.home.description,
+};
 
 export default function Home() {
     return (

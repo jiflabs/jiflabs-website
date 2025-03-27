@@ -2,6 +2,8 @@
 
 import {Main} from "@/component/container/client-container";
 import {readBase64} from "@/util/file";
+import {faTrashCan} from "@fortawesome/free-regular-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Highlight from "highlight.js";
 import {
     ChangeEventHandler,
@@ -25,7 +27,7 @@ function Input({children, ...props}: InputProps) {
     return (
         <label>
             <strong>{children}</strong>
-            {props.type === "file" ? <span>Dateien auswählen</span> : undefined}
+            {props.type === "file" ? <span>Dateien hinzufügen</span> : undefined}
             <input {...props}/>
         </label>
     );
@@ -89,8 +91,7 @@ export default function MDEditor({onSubmit}: Props) {
     const handleImagesChange: ChangeEventHandler<HTMLInputElement> = ({currentTarget}) => {
         const files = currentTarget.files;
         if (!files) return;
-        for (let i = 0; i < files.length; ++i) {
-            const file = files[i];
+        for (const file of files) {
             readBase64(file).then(value => setImages(images => Array.from(new Set([
                 ...images,
                 {
@@ -147,6 +148,10 @@ export default function MDEditor({onSubmit}: Props) {
                                     return images;
                                 });
                             }}/>
+                            <button type="button" onClick={() => setImages(images => images
+                                .filter((_, i) => i !== index))}>
+                                <FontAwesomeIcon icon={faTrashCan}/>
+                            </button>
                         </li>)}
                     </ul> : undefined}
                     <textarea spellCheck={false}

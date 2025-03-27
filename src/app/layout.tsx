@@ -1,6 +1,9 @@
 import Footer from "@/component/footer/footer";
 import Header from "@/component/header/header";
+import {DefaultStrings} from "@/lang/lang";
 import {config} from "@fortawesome/fontawesome-svg-core";
+import {faWarning} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import type {Metadata} from "next";
 import {Fira_Code, Geist} from "next/font/google";
 import React from "react";
@@ -27,7 +30,7 @@ export const metadata: Metadata = {
     authors: [{name: "Felix Schreiber"}],
     creator: "Felix Schreiber",
     generator: "Next.js",
-    keywords: ["jif", "jiflabs", "jiflabsde"],
+    keywords: ["jif", "jiflabs", "jiflabsde", "robotics", "robot"],
     description: "Die offizielle JIFLabs Website",
 };
 
@@ -38,6 +41,10 @@ export default function RootLayout(
         <html lang="de">
         <body className={`${fontGeist.variable} ${fontFira.variable}`}>
         <Header/>
+        <div className="wip-banner">
+            <FontAwesomeIcon icon={faWarning} size="2xl"/>
+            <span>{DefaultStrings.warning}</span>
+        </div>
         {children}
         <Footer/>
         </body>

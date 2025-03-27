@@ -1,10 +1,11 @@
 import {Main} from "@/component/container/container";
 import MDEditor, {Data} from "@/component/md-editor/md-editor";
+import {DefaultStrings} from "@/lang/lang";
 import {Metadata} from "next";
 
 export const metadata: Metadata = {
-    title: "Markdown Editor",
-    description: "Die Markdown-Editor-Seite",
+    title: DefaultStrings.page.editor.title,
+    description: DefaultStrings.page.editor.description,
 };
 
 async function submit(data: Data): Promise<{ success: boolean, message?: string }> {
@@ -24,7 +25,7 @@ async function submit(data: Data): Promise<{ success: boolean, message?: string 
 export default async function Page() {
     return (
         <Main>
-            <h1>Markdown Editor</h1>
+            <h1>{DefaultStrings.page.editor.title}</h1>
             <MDEditor onSubmit={submit}/>
         </Main>
     );

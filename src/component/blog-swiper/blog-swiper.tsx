@@ -1,11 +1,13 @@
 "use client";
 
+import {DefaultStrings} from "@/lang/lang";
 import {formatDate} from "@/util/date";
 import {BlogItem, QueryArray} from "@/util/type";
 import Link from "next/link";
 import React from "react";
 import {Keyboard, Navigation, Pagination} from "swiper/modules";
 import {Swiper, SwiperSlide} from "swiper/react";
+
 import styles from "./blog-swiper.module.scss";
 
 import "swiper/scss";
@@ -25,7 +27,7 @@ function Slide({id, title, author, date, category, content}: BlogItem) {
             </div>
             <div className={styles.link}>
                 <Link href={`/blog/${id}`} title={`'${title}', ${author}`}>
-                    Read more
+                    {DefaultStrings.page.blog.readmore}
                 </Link>
             </div>
         </div>
@@ -57,7 +59,11 @@ export default function BlogSwiper({items: {items}}: {
                 keyboard
                 navigation
                 pagination={{clickable: true, dynamicBullets: true}}>
-            {items.map(item => (<SwiperSlide key={item.id}><Slide {...item}/></SwiperSlide>))}
+            {items.map(item => (
+                <SwiperSlide key={item.id}>
+                    <Slide {...item}/>
+                </SwiperSlide>
+            ))}
         </Swiper>
     );
 }
