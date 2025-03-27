@@ -14,6 +14,7 @@ header.header {
   align-items: center;
   border-radius: 0 0 1rem 2rem;
   z-index: 10;
+  gap: 1rem;
 
   @media (max-width: 767px) {
     padding: 1rem;
@@ -22,6 +23,7 @@ header.header {
 }
 
 a.home {
+  flex-shrink: 0;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
@@ -41,6 +43,8 @@ a.home {
 }
 
 div.right {
+  flex-shrink: 0;
+
   div {
     button {
       display: none;

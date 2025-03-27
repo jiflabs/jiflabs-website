@@ -1,15 +1,16 @@
 import {Main} from "@/component/container/container";
+import {DefaultStrings} from "@/lang/lang";
 import {Metadata} from "next";
 
 export const metadata: Metadata = {
-    title: "Impressum",
-    description: "Das Impressum",
+    title: DefaultStrings.page.imprint.title,
+    description: DefaultStrings.page.imprint.description,
 };
 
 export default async function Page() {
     return (
         <Main slim>
-            <h1>Impressum</h1>
+            <h1>{DefaultStrings.page.imprint.title}</h1>
 
             <h2>Rechtliche Hinweise</h2>
             <p>

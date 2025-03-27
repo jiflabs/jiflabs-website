@@ -1,15 +1,16 @@
 import {Main} from "@/component/container/container";
+import {DefaultStrings} from "@/lang/lang";
 import {Metadata} from "next";
 
 export const metadata: Metadata = {
-    title: "Datenschutzerklärung",
-    description: "Die Datenschutzerklärung",
+    title: DefaultStrings.page.privacy.title,
+    description: DefaultStrings.page.privacy.description,
 };
 
 export default async function Page() {
     return (
         <Main slim>
-            <h1>Datenschutzerklärung</h1>
+            <h1>{DefaultStrings.page.privacy.title}</h1>
 
             <h2>1. Einleitung</h2>
             <p>

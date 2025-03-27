@@ -62,7 +62,14 @@ img, svg {
 
 p > img, p > svg {
   width: 50%;
-  float: left;
+
+  &:nth-of-type(even) {
+    float: right;
+  }
+
+  &:nth-of-type(odd) {
+    float: left;
+  }
 }
 
 a, button {
@@ -74,13 +81,12 @@ a, button {
   background: var(--color-link-background);
   border-radius: var(--border-radius);
   outline: none;
-
-  &:hover {
-    text-decoration: underline var(--color-active);
-  }
+  cursor: pointer;
 
   &:focus,
-  &:active {
+  &:active,
+  &:hover {
+    text-decoration: underline var(--color-active);
     color: var(--color-active);
   }
 }
@@ -180,4 +186,25 @@ p {
 code {
   font-family: var(--font-fira-code), monospace;
   border-radius: var(--border-radius);
+}
+
+.wip-banner {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background: var(--color-secondary);
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  width: 80%;
+  margin: 0 auto 2rem auto;
+
+  & svg {
+    color: yellow;
+  }
+
+  @media(max-width: 768px) {
+    display: none;
+  }
 }

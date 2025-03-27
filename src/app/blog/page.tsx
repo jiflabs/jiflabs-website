@@ -1,12 +1,13 @@
 import BlogSwiper from "@/component/blog-swiper/blog-swiper";
 import {Main} from "@/component/container/container";
+import {DefaultStrings} from "@/lang/lang";
 import {queryResource} from "@/util/api";
 import {BlogItem} from "@/util/type";
 import {Metadata} from "next";
 
 export const metadata: Metadata = {
-    title: "Blog",
-    description: "Der Blog",
+    title: DefaultStrings.page.blog.title,
+    description: DefaultStrings.page.blog.description,
 };
 
 export default async function Page() {
@@ -14,8 +15,8 @@ export default async function Page() {
 
     return (
         <Main>
-            <h1>Blog</h1>
-            <h2>Projekte, Gedanken und Informationen</h2>
+            <h1>{DefaultStrings.page.blog.title}</h1>
+            <h2>{DefaultStrings.page.blog.subtitle}</h2>
             <p>
                 Bavaria ipsum dolor sit amet Broadwurschtbudn bitt owe jo leck mi Woibbadinga baddscher, Sepp wos ded!
                 Midanand gelbe Rüam hod des hoggd, Engelgwand a bravs gar nia need damischa. Liberalitas Bavariae
