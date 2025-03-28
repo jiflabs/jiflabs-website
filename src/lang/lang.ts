@@ -5,6 +5,9 @@ export type LangRegistry = {
 export type LangDefinition = {
     label: string,
     warning: string,
+    unsupported: {
+        audio: string,
+    },
     page: {
         home: {
             title: string,
@@ -47,6 +50,9 @@ export const Strings: LangRegistry = {
     "de": {
         label: "Deutsch",
         warning: "Diese Seite ist noch in aktiver Entwicklung - Wichtige Informationen wie Datenschutz und Impressum sind unter Umständen noch nicht vollständing!",
+        unsupported: {
+            audio: "Der verwendete Browser unterstützt keine Audiowiedergabe.",
+        },
         page: {
             home: {
                 title: "Startseite",
@@ -87,6 +93,9 @@ export const Strings: LangRegistry = {
     "en": {
         label: "English",
         warning: "This website is still active work in progress - some information like privacy and imprint are maybe incomplete!",
+        unsupported: {
+            audio: "This browser does not support audio playback.",
+        },
         page: {
             imprint: {
                 title: "Imprint",

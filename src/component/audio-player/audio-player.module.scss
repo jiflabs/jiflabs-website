@@ -1,0 +1,52 @@
+div.player {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border: 2px solid var(--color-secondary);
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  width: fit-content;
+
+  & button {
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background: none;
+    text-align: center;
+    width: 2rem;
+    height: 2rem;
+
+    & span {
+      display: none;
+    }
+  }
+
+  & label {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+
+    & span {
+      display: none;
+    }
+  }
+
+  & span {
+    margin-right: 1rem;
+  }
+
+  & input[type="range"] {
+    accent-color: var(--color-active);
+  }
+
+  & input.playback {
+    width: 20rem;
+  }
+
+  & input.volume {
+    width: 10rem;
+  }
+}
