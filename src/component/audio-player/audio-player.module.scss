@@ -1,13 +1,31 @@
-div.player {
+div.controls {
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 0.5rem 2rem;
   border: 2px solid var(--color-secondary);
   border-radius: var(--border-radius);
   padding: 1rem;
-  width: fit-content;
+  width: auto;
+  container-type: inline-size;
+
+  & div {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    gap: 1rem;
+    width: auto;
+    flex-shrink: 1;
+  }
+
+  & div.left {
+    flex-grow: 1;
+  }
+
+  & div.right {
+    flex-grow: 0;
+  }
 
   & button {
     padding: 0;
@@ -28,25 +46,42 @@ div.player {
     flex-flow: column nowrap;
     align-items: center;
     justify-content: center;
+    flex-shrink: 1;
 
     & span {
       display: none;
     }
   }
 
-  & span {
-    margin-right: 1rem;
-  }
-
   & input[type="range"] {
     accent-color: var(--color-active);
   }
 
-  & input.playback {
-    width: 20rem;
+  & label.playback {
+    width: min(20rem, auto);
+    flex-shrink: 1;
+    flex-grow: 1;
+
+    & input {
+      width: 100%;
+    }
   }
 
-  & input.volume {
-    width: 10rem;
+  & label.volume {
+    width: min(10rem, auto);
+    flex-shrink: 1;
+
+    & input {
+      width: 100%;
+    }
+  }
+
+  & span.time {
+    width: 6rem;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+    font-family: monospace;
   }
 }

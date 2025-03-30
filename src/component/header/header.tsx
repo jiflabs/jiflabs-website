@@ -19,7 +19,7 @@ export default function Header() {
     return (
         <header className={`${styles.header}`}>
             <Link href="/" className={styles.home}>
-                <Image src={icon} alt="" className={styles.home}/>
+                <Image src={icon} alt="" className={styles.home} priority/>
                 {DefaultStrings.page.home.title}
             </Link>
             <div className={`${styles.right} ${open ? styles.open : styles.close}`}>
