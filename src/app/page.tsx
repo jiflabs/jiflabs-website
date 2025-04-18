@@ -1,13 +1,13 @@
 import {Main} from "@/component/container/container";
-import {DefaultStrings} from "@/lang/lang";
 import {Metadata} from "next";
 
-export const metadata: Metadata = {
-    title: "JIFLabs | " + DefaultStrings.page.home.title,
-    description: DefaultStrings.page.home.description,
-};
+export async function generateMetadata(): Promise<Metadata> {
+    return {
+        title: "JIFLabs | Startseite",
+    };
+}
 
-export default function Home() {
+export default async function Page() {
     return (
         <Main>
             <h1>Überschrift 1</h1>

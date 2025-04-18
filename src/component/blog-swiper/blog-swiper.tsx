@@ -1,6 +1,5 @@
 "use client";
 
-import {DefaultStrings} from "@/lang/lang";
 import {formatDate} from "@/util/date";
 import {BlogItem, QueryArray} from "@/util/type";
 import Link from "next/link";
@@ -27,16 +26,14 @@ function Slide({id, title, author, date, category, content}: BlogItem) {
             </div>
             <div className={styles.link}>
                 <Link href={`/blog/${id}`} title={`'${title}', ${author}`}>
-                    {DefaultStrings.page.blog.readmore}
+                    Weiterlesen
                 </Link>
             </div>
         </div>
     );
 }
 
-export default function BlogSwiper({items: {items}}: {
-    items: QueryArray<BlogItem>
-}) {
+export default function BlogSwiper({items: {items}}: { items: QueryArray<BlogItem> }) {
     return (
         <Swiper className={styles.wrapper}
                 slidesPerView={1}

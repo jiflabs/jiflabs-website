@@ -1,12 +1,12 @@
 import {Main} from "@/component/container/container";
 import MDEditor, {Data} from "@/component/md-editor/md-editor";
-import {DefaultStrings} from "@/lang/lang";
 import {Metadata} from "next";
 
-export const metadata: Metadata = {
-    title: DefaultStrings.page.editor.title,
-    description: DefaultStrings.page.editor.description,
-};
+export async function generateMetadata(): Promise<Metadata> {
+    return {
+        title: "Markdown Editor",
+    };
+}
 
 async function submit(data: Data): Promise<{ success: boolean, message?: string }> {
     "use server";
@@ -25,8 +25,8 @@ async function submit(data: Data): Promise<{ success: boolean, message?: string 
 export default async function Page() {
     return (
         <Main>
-            <h1>{DefaultStrings.page.editor.title}</h1>
-            <MDEditor onSubmit={submit}/>
+            <h1>Markdown Editor</h1>
+            <MDEditor onSubmitAction={submit}/>
         </Main>
     );
 }

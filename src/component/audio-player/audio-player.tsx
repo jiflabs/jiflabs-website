@@ -1,6 +1,5 @@
 "use client";
 
-import {DefaultStrings} from "@/lang/lang";
 import {
     faPause,
     faPlay,
@@ -13,10 +12,6 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {KeyboardEventHandler, useEffect, useRef, useState} from "react";
 
 import styles from "./audio-player.module.scss";
-
-type Props = {
-    src: string,
-}
 
 type SeekEvent<T, C> = {
     target: T,
@@ -34,7 +29,7 @@ function formatSeconds(x: number | undefined): string {
     return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
 }
 
-export default function AudioPlayer({src}: Props) {
+export default function AudioPlayer({src}: { src: string }) {
     const audioRef = useRef<HTMLAudioElement>(null);
 
     const mod = (consumer: (audio: HTMLAudioElement) => void) => {
@@ -174,7 +169,7 @@ export default function AudioPlayer({src}: Props) {
     };
 
     return (
-        <div title="audio player">
+        <div title="Audio-Player">
             <audio ref={audioRef}
                    src={src}
                    preload="none"
@@ -184,20 +179,20 @@ export default function AudioPlayer({src}: Props) {
                    onVolumeChange={event => setVolume(event.currentTarget.volume * 100)}
                    onTimeUpdate={event => setTime(event.currentTarget.currentTime)}
                    onEnded={event => event.currentTarget.currentTime = 0}>
-                {DefaultStrings.unsupported.audio}
+                Dieser Browser unterstützt keine Audiowiedergabe.
             </audio>
             <div className={styles.controls}
-                 title="player controls"
+                 title="Player-Steuerung"
                  tabIndex={0}
                  onKeyDown={handleControlsBegin}
                  onKeyUp={handleControlsEnd}>
                 <div className={styles.left}>
-                    <button onClick={togglePause} title="play | pause">
-                        <span>play | pause</span>
+                    <button onClick={togglePause} title={paused ? "Fortsetzen" : "Pausieren"}>
+                        <span>{paused ? "Fortsetzen" : "Pausieren"}</span>
                         <FontAwesomeIcon icon={paused ? faPlay : faPause} size="lg"/>
                     </button>
                     <label className={styles.playback}>
-                        <span>playback position control</span>
+                        <span>Wiedergabeposition</span>
                         <input type="range"
                                min={0}
                                max={duration ?? 0}
@@ -210,19 +205,19 @@ export default function AudioPlayer({src}: Props) {
                                onPointerUp={handleSeekEnd}
                                onPointerCancel={handleSeekEnd}
                                onChange={event => mod(audio => audio.currentTime = event.currentTarget.valueAsNumber)}
-                               title="playback position control"/>
+                               title="Wiedergabeposition"/>
                     </label>
                     <span className={styles.time}>
-                    <span title="current playback position">
+                    <span title="Aktuelle Wiedergabeposition">
                         {formatSeconds(time)}
-                    </span> / <span title="playback duration">
+                    </span> / <span title="Wiedergabeendposition">
                         {formatSeconds(duration)}
                     </span>
                 </span>
                 </div>
                 <div className={styles.right}>
-                    <button onClick={toggleMute} title="mute | unmute">
-                        <span>mute | unmute</span>
+                    <button onClick={toggleMute} title={muted ? "Lautschalten" : "Stummschalten"}>
+                        <span>{muted ? "Lautschalten" : "Stummschalten"}</span>
                         <FontAwesomeIcon icon={
                             muted
                                 ? faVolumeXmark
@@ -234,7 +229,7 @@ export default function AudioPlayer({src}: Props) {
                         } size="lg"/>
                     </button>
                     <label className={styles.volume}>
-                        <span>volume control</span>
+                        <span>Volumen</span>
                         <input type="range"
                                min={0}
                                max={100}
@@ -248,7 +243,7 @@ export default function AudioPlayer({src}: Props) {
                                        audio.volume = event.currentTarget.valueAsNumber / 100;
                                    }
                                })}
-                               title="volume control"/>
+                               title="Volumen"/>
                     </label>
                 </div>
             </div>

@@ -6,6 +6,10 @@ export async function fetchAPI(input: string, init?: RequestInit) {
     return await fetch(`${process.env.API_ENDPOINT}/${input}`, init);
 }
 
+export async function fetchJellyfin(input: string, init?: RequestInit) {
+    return await fetch(`${process.env.JELLYFIN_ENDPOINT}/${input}`, init);
+}
+
 export async function fetchResource<T>(type: string, id: string, init?: RequestInit) {
     const response = await fetchAPI(`resource/${type}/${id}`, init);
     return await response.json() as T;

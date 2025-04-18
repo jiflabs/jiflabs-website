@@ -21,13 +21,14 @@ import styles from "./md-editor.module.scss";
 
 type InputProps = {
     children?: ReactNode,
+    message?: ReactNode,
 } & DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 
-function Input({children, ...props}: InputProps) {
+function Input({children, message, ...props}: InputProps) {
     return (
         <label>
             <strong>{children}</strong>
-            {props.type === "file" ? <span>Dateien hinzufügen</span> : undefined}
+            {message ? <span>{message}</span> : undefined}
             <input {...props}/>
         </label>
     );
@@ -53,11 +54,7 @@ export type Data = {
     images: Image[],
 }
 
-type Props = {
-    onSubmit: (data: Data) => Promise<Status>;
-}
-
-export default function MDEditor({onSubmit}: Props) {
+export default function MDEditor({onSubmitAction}: { onSubmitAction: (data: Data) => Promise<Status> }) {
 
     const [status, setStatus] = useState<Status | null | undefined>();
     const [title, setTitle] = useState<string>("");
@@ -83,7 +80,7 @@ export default function MDEditor({onSubmit}: Props) {
             images,
         };
 
-        const result = await onSubmit(data);
+        const result = await onSubmitAction(data);
         setStatus(result);
         setTimeout(() => setStatus(undefined), 2000);
     };
@@ -117,24 +114,25 @@ export default function MDEditor({onSubmit}: Props) {
             <section className={styles.editor}>
                 <form onSubmit={handleSubmit}>
                     <Input type="text"
-                           placeholder="Seitentitel..."
+                           placeholder="Titel"
                            required
                            onChange={({currentTarget}) => setTitle(currentTarget.value)}>
                         Titel
                     </Input>
                     <Input type="text"
-                           placeholder="Schlagwörter..."
+                           placeholder="Schlagworte"
                            required
                            onChange={({currentTarget}) => setTags(currentTarget.value)}>
                         Tags
                     </Input>
                     <Input type="text"
-                           placeholder="Kategorie..."
+                           placeholder="Kategorie"
                            required
                            onChange={({currentTarget}) => setCategory(currentTarget.value)}>
                         Kategorie
                     </Input>
                     <Input type="file"
+                           message="Dateien anfügen"
                            accept="image/*"
                            multiple
                            onChange={handleImagesChange}>
@@ -163,8 +161,8 @@ export default function MDEditor({onSubmit}: Props) {
                         {status && (
                             <p>
                                 {status.success
-                                    ? "Seite erfolgreich erstellt!"
-                                    : `Fehler beim erstellen der Seite: ${status.message}`}
+                                    ? "Seite erfolgreich erstellt."
+                                    : `Fehler beim Erstellen der Seite: ${status.message}`}
                             </p>
                         )}
                     </div>

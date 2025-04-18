@@ -16,6 +16,7 @@ export default function Container<E extends ElementType>(
         slim,
         full,
         className,
+
         ...props
     }: Props<E>,
 ) {
