@@ -1,4 +1,4 @@
-import BlogSwiper from "@/component/blog-swiper/blog-swiper";
+import {BlogSwiper} from "@/component/blog-swiper/blog-swiper";
 import {Main} from "@/component/container/container";
 import {queryResource} from "@/util/api";
 import {BlogItem} from "@/util/type";
@@ -32,3 +32,5 @@ export default async function Page() {
         </Main>
     );
 }
+
+export const dynamic = "force-dynamic";

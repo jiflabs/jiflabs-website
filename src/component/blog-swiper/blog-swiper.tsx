@@ -4,12 +4,13 @@ import {formatDate} from "@/util/date";
 import {BlogItem, QueryArray} from "@/util/type";
 import Link from "next/link";
 import React from "react";
-import {Keyboard, Navigation, Pagination} from "swiper/modules";
+import {A11y, Keyboard, Navigation, Pagination} from "swiper/modules";
 import {Swiper, SwiperSlide} from "swiper/react";
 
 import styles from "./blog-swiper.module.scss";
 
 import "swiper/scss";
+import "swiper/scss/a11y";
 import "swiper/scss/keyboard";
 import "swiper/scss/navigation";
 import "swiper/scss/pagination";
@@ -33,7 +34,7 @@ function Slide({id, title, author, date, category, content}: BlogItem) {
     );
 }
 
-export default function BlogSwiper({items: {items}}: { items: QueryArray<BlogItem> }) {
+export function BlogSwiper({items: {items}}: { items: QueryArray<BlogItem> }) {
     return (
         <Swiper className={styles.wrapper}
                 slidesPerView={1}
@@ -53,13 +54,15 @@ export default function BlogSwiper({items: {items}}: { items: QueryArray<BlogIte
                     },
                 }}
                 modules={[
+                    A11y,
                     Keyboard,
                     Navigation,
                     Pagination,
                 ]}
+                a11y={{enabled: true}}
                 keyboard
                 navigation
-                pagination={{clickable: true, dynamicBullets: true}}>
+                pagination={{dynamicBullets: true}}>
             {items.map(item => (
                 <SwiperSlide key={item.id}>
                     <Slide {...item}/>

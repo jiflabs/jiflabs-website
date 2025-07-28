@@ -6,7 +6,7 @@ import {faWarning} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 import type {Metadata} from "next";
-import {Fira_Code, Fira_Sans, Geist} from "next/font/google";
+import {Fira_Code, Fira_Sans} from "next/font/google";
 
 import type {ReactNode} from "react";
 
@@ -15,11 +15,6 @@ import "./globals.scss";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 
 config.autoAddCss = false;
-
-const fontGeist = Geist({
-    variable: "--font-geist-sans",
-    subsets: ["latin", "latin-ext"],
-});
 
 const fontFiraCode = Fira_Code({
     variable: "--font-fira-code",
