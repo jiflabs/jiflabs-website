@@ -6,11 +6,11 @@ import {faWarning} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 import type {Metadata} from "next";
-import {Fira_Code, Geist} from "next/font/google";
-
-import "./globals.scss";
+import {Fira_Code, Fira_Sans, Geist} from "next/font/google";
 
 import type {ReactNode} from "react";
+
+import "./globals.scss";
 
 import "@fortawesome/fontawesome-svg-core/styles.css";
 
@@ -21,9 +21,15 @@ const fontGeist = Geist({
     subsets: ["latin", "latin-ext"],
 });
 
-const fontFira = Fira_Code({
+const fontFiraCode = Fira_Code({
     variable: "--font-fira-code",
     subsets: ["latin", "latin-ext"],
+});
+
+const fontFiraSans = Fira_Sans({
+    variable: "--font-fira-sans",
+    subsets: ["latin", "latin-ext"],
+    weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
@@ -42,7 +48,7 @@ export default async function Layout(
 ) {
     return (
         <html lang="de">
-        <body className={`${fontGeist.variable} ${fontFira.variable}`}>
+        <body className={`${fontFiraSans.className} ${fontFiraCode.variable}`}>
         <Header/>
         <div className="wip-banner">
             <FontAwesomeIcon icon={faWarning} size="2xl"/>

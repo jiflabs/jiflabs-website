@@ -14,7 +14,11 @@
     gap: 1rem;
 
     & h1 {
-      color: var(--color-active);
+      color: var(--color-accent);
+    }
+
+    & h2:before {
+      display: none;
     }
   }
 }

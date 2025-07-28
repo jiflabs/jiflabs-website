@@ -47,6 +47,10 @@ export default function BlogSwiper({items: {items}}: { items: QueryArray<BlogIte
                         slidesPerView: 3,
                         spaceBetween: 50,
                     },
+                    2000: {
+                        slidesPerView: 4,
+                        spaceBetween: 50,
+                    },
                 }}
                 modules={[
                     Keyboard,

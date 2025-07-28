@@ -120,7 +120,7 @@ export default function MDEditor({onSubmitAction}: { onSubmitAction: (data: Data
                         Titel
                     </Input>
                     <Input type="text"
-                           placeholder="Schlagworte"
+                           placeholder="Tags"
                            required
                            onChange={({currentTarget}) => setTags(currentTarget.value)}>
                         Tags

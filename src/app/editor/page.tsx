@@ -1,5 +1,6 @@
 import {Main} from "@/component/container/container";
 import MDEditor, {Data} from "@/component/md-editor/md-editor";
+
 import {Metadata} from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
