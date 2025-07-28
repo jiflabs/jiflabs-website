@@ -1,16 +1,16 @@
 "use client";
 
-import {DefaultStrings} from "@/lang/lang";
 import {formatDate} from "@/util/date";
 import {BlogItem, QueryArray} from "@/util/type";
 import Link from "next/link";
 import React from "react";
-import {Keyboard, Navigation, Pagination} from "swiper/modules";
+import {A11y, Keyboard, Navigation, Pagination} from "swiper/modules";
 import {Swiper, SwiperSlide} from "swiper/react";
 
 import styles from "./blog-swiper.module.scss";
 
 import "swiper/scss";
+import "swiper/scss/a11y";
 import "swiper/scss/keyboard";
 import "swiper/scss/navigation";
 import "swiper/scss/pagination";
@@ -27,16 +27,14 @@ function Slide({id, title, author, date, category, content}: BlogItem) {
             </div>
             <div className={styles.link}>
                 <Link href={`/blog/${id}`} title={`'${title}', ${author}`}>
-                    {DefaultStrings.page.blog.readmore}
+                    Weiterlesen
                 </Link>
             </div>
         </div>
     );
 }
 
-export default function BlogSwiper({items: {items}}: {
-    items: QueryArray<BlogItem>
-}) {
+export function BlogSwiper({items: {items}}: { items: QueryArray<BlogItem> }) {
     return (
         <Swiper className={styles.wrapper}
                 slidesPerView={1}
@@ -50,15 +48,21 @@ export default function BlogSwiper({items: {items}}: {
                         slidesPerView: 3,
                         spaceBetween: 50,
                     },
+                    2000: {
+                        slidesPerView: 4,
+                        spaceBetween: 50,
+                    },
                 }}
                 modules={[
+                    A11y,
                     Keyboard,
                     Navigation,
                     Pagination,
                 ]}
+                a11y={{enabled: true}}
                 keyboard
                 navigation
-                pagination={{clickable: true, dynamicBullets: true}}>
+                pagination={{dynamicBullets: true}}>
             {items.map(item => (
                 <SwiperSlide key={item.id}>
                     <Slide {...item}/>

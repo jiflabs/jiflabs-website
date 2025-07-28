@@ -1,25 +1,30 @@
 import Footer from "@/component/footer/footer";
 import Header from "@/component/header/header";
-import {DefaultStrings} from "@/lang/lang";
+
 import {config} from "@fortawesome/fontawesome-svg-core";
 import {faWarning} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+
 import type {Metadata} from "next";
-import {Fira_Code, Geist} from "next/font/google";
-import React from "react";
+import {Fira_Code, Fira_Sans} from "next/font/google";
+
+import type {ReactNode} from "react";
+
 import "./globals.scss";
+
 import "@fortawesome/fontawesome-svg-core/styles.css";
 
 config.autoAddCss = false;
 
-const fontGeist = Geist({
-    variable: "--font-geist-sans",
+const fontFiraCode = Fira_Code({
+    variable: "--font-fira-code",
     subsets: ["latin", "latin-ext"],
 });
 
-const fontFira = Fira_Code({
-    variable: "--font-fira-code",
+const fontFiraSans = Fira_Sans({
+    variable: "--font-fira-sans",
     subsets: ["latin", "latin-ext"],
+    weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
@@ -31,19 +36,18 @@ export const metadata: Metadata = {
     creator: "Felix Schreiber",
     generator: "Next.js",
     keywords: ["jif", "jiflabs", "jiflabsde", "robotics", "robot"],
-    description: "Die offizielle JIFLabs Website",
 };
 
-export default function RootLayout(
-    {children}: Readonly<{ children: React.ReactNode; }>,
+export default async function Layout(
+    {children}: Readonly<{ children: ReactNode }>,
 ) {
     return (
         <html lang="de">
-        <body className={`${fontGeist.variable} ${fontFira.variable}`}>
+        <body className={`${fontFiraSans.className} ${fontFiraCode.variable}`}>
         <Header/>
         <div className="wip-banner">
             <FontAwesomeIcon icon={faWarning} size="2xl"/>
-            <span>{DefaultStrings.warning}</span>
+            <span>Warnung: diese Webseite ist noch in Entwicklung, sprich wichtige Information wie die Datenschutzerklärung und das Impressum können unter Umständen noch fehlerhaft oder unvollständig sein.</span>
         </div>
         {children}
         <Footer/>

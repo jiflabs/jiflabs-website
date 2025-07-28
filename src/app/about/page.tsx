@@ -1,16 +1,16 @@
 import {Main} from "@/component/container/container";
-import {DefaultStrings} from "@/lang/lang";
 import {Metadata} from "next";
 
-export const metadata: Metadata = {
-    title: DefaultStrings.page.about.title,
-    description: DefaultStrings.page.about.description,
-};
+export async function generateMetadata(): Promise<Metadata> {
+    return {
+        title: "Über Uns",
+    };
+}
 
 export default async function Page() {
     return (
         <Main>
-            <h1>{DefaultStrings.page.about.title}</h1>
+            <h1>Über Uns</h1>
         </Main>
     );
 }

@@ -4,6 +4,11 @@
   gap: 1rem;
   margin: 0 auto;
   width: 80%;
+
+  @media print {
+    margin: 0.6in;
+    width: auto;
+  }
 }
 
 .slim {

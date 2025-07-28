@@ -4,7 +4,7 @@ div.controls {
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem 2rem;
-  border: 2px solid var(--color-secondary);
+  border: 2px solid var(--color-background-2);
   border-radius: var(--border-radius);
   padding: 1rem;
   width: auto;
@@ -54,7 +54,7 @@ div.controls {
   }
 
   & input[type="range"] {
-    accent-color: var(--color-active);
+    accent-color: var(--color-accent);
   }
 
   & label.playback {
@@ -83,5 +83,9 @@ div.controls {
     align-items: center;
     justify-content: space-between;
     font-family: monospace;
+  }
+
+  @media print {
+    display: none;
   }
 }

@@ -1,11 +1,14 @@
 import {Main} from "@/component/container/container";
-import {DefaultStrings} from "@/lang/lang";
 import {fetchResource} from "@/util/api";
 import {formatDate} from "@/util/date";
 import {BlogItem} from "@/util/type";
 import {Metadata} from "next";
 
-export async function generateMetadata({params}: { params: Promise<{ id: string }> }): Promise<Metadata> {
+type Props = {
+    params: Promise<{ id: string }>
+}
+
+export async function generateMetadata({params}: Props): Promise<Metadata> {
     const {id} = await params;
     const blog = await fetchResource<BlogItem>("blog", id);
 
@@ -16,16 +19,16 @@ export async function generateMetadata({params}: { params: Promise<{ id: string 
     };
 }
 
-export default async function Page({params}: { params: Promise<{ id: string }> }) {
-
+export default async function Page({params}: Props) {
     const {id} = await params;
+
     const blog = await fetchResource<BlogItem>("blog", id);
 
     return (
         <Main>
             <div>
                 <h1>{blog.title}</h1>
-                <h2>{DefaultStrings.page.blog.by} {blog.author}</h2>
+                <h2>von {blog.author}</h2>
                 <h3>in {blog.category}</h3>
                 <time dateTime={blog.date}><h4>{formatDate(blog.date)}</h4></time>
             </div>
@@ -33,5 +36,3 @@ export default async function Page({params}: { params: Promise<{ id: string }> }
         </Main>
     );
 }
-
-export const dynamic = "force-dynamic";

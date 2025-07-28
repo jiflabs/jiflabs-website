@@ -6,9 +6,9 @@ export default async function NotFound() {
         <main className={styles.container}>
             <div>
                 <h1>404</h1>
-                <h3>Page Not Found</h3>
+                <h2>Seite nicht gefunden</h2>
             </div>
-            <Link href="/">Go Home</Link>
+            <Link href="/">Zurück zur Startseite</Link>
         </main>
     );
 }

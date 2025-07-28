@@ -1,5 +1,5 @@
 .footer {
-  background: var(--color-secondary);
+  background: var(--color-background-2);
   width: 100%;
   padding: 3rem 2rem;
   margin-top: 3rem;
@@ -12,6 +12,10 @@
   @media (max-width: 767px) {
     flex-flow: column nowrap;
     padding: 1rem;
+  }
+
+  @media print {
+    display: none;
   }
 }
 

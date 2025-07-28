@@ -19,7 +19,7 @@
   height: auto;
   padding: 2rem;
   border-radius: 1rem;
-  background-color: var(--color-secondary);
+  background-color: var(--color-background-2);
   overflow: hidden;
 }
 
@@ -59,7 +59,7 @@
 
   & textarea {
     border-radius: var(--border-radius);
-    background-color: var(--color-background);
+    background: var(--color-background-1);
     padding: 1rem;
     font-family: var(--font-fira-code), monospace;
   }
@@ -86,13 +86,13 @@
   }
 
   & input[type="text"] {
-    border-bottom: 1px solid var(--color-primary);
+    border-bottom: 1px solid var(--color-text);
     transition: border-bottom-color 0.1s ease-in-out;
 
     &:hover,
     &:focus,
     &:active {
-      border-bottom: 1px solid var(--color-active);
+      border-bottom: 1px solid var(--color-accent);
     }
   }
 }
