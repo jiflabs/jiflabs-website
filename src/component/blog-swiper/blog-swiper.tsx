@@ -1,7 +1,7 @@
 "use client";
 
+import {Article} from "@/content/article";
 import {formatDate} from "@/util/date";
-import {BlogItem, QueryArray} from "@/util/type";
 import Link from "next/link";
 import React from "react";
 import {A11y, Keyboard, Navigation, Pagination} from "swiper/modules";
@@ -15,26 +15,24 @@ import "swiper/scss/keyboard";
 import "swiper/scss/navigation";
 import "swiper/scss/pagination";
 
-function Slide({id, title, author, date, category, content}: BlogItem) {
+function Slide({id, title, create_date, content}: Article) {
     return (
-        <div className={styles.slide}>
-            <div>
-                <h3>{title}</h3>
-                <h4>{author}</h4>
-                <h5>{category}</h5>
-                <time dateTime={date}><h6>{formatDate(date)}</h6></time>
-                <div>{content.slice(0, 50) + "..."}</div>
-            </div>
-            <div className={styles.link}>
-                <Link href={`/blog/${id}`} title={`'${title}', ${author}`}>
-                    Weiterlesen
-                </Link>
-            </div>
-        </div>
+        <Link href={`/blog/${id}`} title={title} className={styles.slide}>
+            <h3>{title}</h3>
+            <time dateTime={new Date(create_date).toISOString()}>
+                {formatDate(create_date)}
+            </time>
+            <div>{`${content.slice(0, 50)}...`}</div>
+            <span className={`link ${styles.link}`}>Weiterlesen</span>
+        </Link>
     );
 }
 
-export function BlogSwiper({items: {items}}: { items: QueryArray<BlogItem> }) {
+type Props = {
+    items: Article[],
+}
+
+export function BlogSwiper({items}: Readonly<Props>) {
     return (
         <Swiper className={styles.wrapper}
                 slidesPerView={1}

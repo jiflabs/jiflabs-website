@@ -1,3 +1,3 @@
-export function formatDate(date: string): string {
-    return new Date(date).toLocaleDateString("de-DE");
+export function formatDate(timestamp: number): string {
+    return new Date(timestamp).toLocaleDateString("de-DE");
 }

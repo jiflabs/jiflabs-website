@@ -1,7 +1,6 @@
 import {BlogSwiper} from "@/component/blog-swiper/blog-swiper";
 import {Main} from "@/component/container/container";
-import {queryResource} from "@/util/api";
-import {BlogItem} from "@/util/type";
+import {getAllArticles} from "@/content/article";
 import {Metadata} from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -11,7 +10,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Page() {
-    const items = await queryResource<BlogItem>("blog");
+    const {items} = await getAllArticles();
 
     return (
         <Main>
@@ -28,7 +27,9 @@ export default async function Page() {
                 Schaung kost nix a bissal wos gehd ollaweil nackata Hetschapfah jo mei, Broadwurschtbudn hawadere
                 midananda hea ham. Amoi is ma Wuascht Sauakraud, d’.
             </p>
-            <BlogSwiper items={items}/>
+            {items.length ? (
+                <BlogSwiper items={items}/>
+            ) : <p>Keine Einträge</p>}
         </Main>
     );
 }
