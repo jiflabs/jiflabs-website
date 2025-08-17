@@ -1,9 +1,6 @@
 "use client";
 
-import {formatDate} from "@/util/date";
-import {BlogItem, QueryArray} from "@/util/type";
-import Link from "next/link";
-import React from "react";
+import React, {ReactNode} from "react";
 import {A11y, Keyboard, Navigation, Pagination} from "swiper/modules";
 import {Swiper, SwiperSlide} from "swiper/react";
 
@@ -15,26 +12,11 @@ import "swiper/scss/keyboard";
 import "swiper/scss/navigation";
 import "swiper/scss/pagination";
 
-function Slide({id, title, author, date, category, content}: BlogItem) {
-    return (
-        <div className={styles.slide}>
-            <div>
-                <h3>{title}</h3>
-                <h4>{author}</h4>
-                <h5>{category}</h5>
-                <time dateTime={date}><h6>{formatDate(date)}</h6></time>
-                <div>{content.slice(0, 50) + "..."}</div>
-            </div>
-            <div className={styles.link}>
-                <Link href={`/blog/${id}`} title={`'${title}', ${author}`}>
-                    Weiterlesen
-                </Link>
-            </div>
-        </div>
-    );
+type Props = {
+    children: ReactNode[],
 }
 
-export function BlogSwiper({items: {items}}: { items: QueryArray<BlogItem> }) {
+export function BlogSwiper({children}: Readonly<Props>) {
     return (
         <Swiper className={styles.wrapper}
                 slidesPerView={1}
@@ -63,9 +45,9 @@ export function BlogSwiper({items: {items}}: { items: QueryArray<BlogItem> }) {
                 keyboard
                 navigation
                 pagination={{dynamicBullets: true}}>
-            {items.map(item => (
-                <SwiperSlide key={item.id}>
-                    <Slide {...item}/>
+            {children.map((child, index) => (
+                <SwiperSlide key={index}>
+                    {child}
                 </SwiperSlide>
             ))}
         </Swiper>

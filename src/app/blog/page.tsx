@@ -1,8 +1,11 @@
 import {BlogSwiper} from "@/component/blog-swiper/blog-swiper";
 import {Main} from "@/component/container/container";
-import {queryResource} from "@/util/api";
-import {BlogItem} from "@/util/type";
+import {Article, getAllArticles} from "@/content/article";
+import {getUsersByArticleId} from "@/content/user";
+import {formatDate} from "@/util/date";
 import {Metadata} from "next";
+import Link from "next/link";
+import styles from "./page.module.scss";
 
 export async function generateMetadata(): Promise<Metadata> {
     return {
@@ -10,8 +13,24 @@ export async function generateMetadata(): Promise<Metadata> {
     };
 }
 
+async function Slide({id, title, create_date, content}: Article) {
+    const {items: users} = await getUsersByArticleId(id);
+
+    return (
+        <Link href={`/blog/${id}`} title={title} className={styles.slide}>
+            <h3>{title}</h3>
+            <time dateTime={new Date(create_date).toISOString()}>
+                {formatDate(create_date)}
+            </time>
+            <span>von {users.map(user => user.name).join(", ")}</span>
+            <span className={styles.content}>{`${content.slice(0, 50)}...`}</span>
+            <span className={`link ${styles.link}`}>Weiterlesen</span>
+        </Link>
+    );
+}
+
 export default async function Page() {
-    const items = await queryResource<BlogItem>("blog");
+    const {items} = await getAllArticles();
 
     return (
         <Main>
@@ -28,7 +47,11 @@ export default async function Page() {
                 Schaung kost nix a bissal wos gehd ollaweil nackata Hetschapfah jo mei, Broadwurschtbudn hawadere
                 midananda hea ham. Amoi is ma Wuascht Sauakraud, d’.
             </p>
-            <BlogSwiper items={items}/>
+            {items.length ? (
+                <BlogSwiper>
+                    {items.map(item => <Slide key={item.id} {...item}/>)}
+                </BlogSwiper>
+            ) : <p>Keine Einträge</p>}
         </Main>
     );
 }

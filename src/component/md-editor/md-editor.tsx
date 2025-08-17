@@ -153,7 +153,7 @@ export default function MDEditor({onSubmitAction}: { onSubmitAction: (data: Data
                         </li>)}
                     </ul> : undefined}
                     <textarea spellCheck={false}
-                              autoFocus={true}
+                              autoFocus
                               required
                               onChange={({currentTarget}) => setContent(currentTarget.value)}/>
                     <div className={styles.submit}>

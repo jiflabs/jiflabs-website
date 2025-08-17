@@ -10,7 +10,7 @@ export default async function Footer() {
                 <nav>
                     <Link href="/imprint">Impressum</Link>
                     <Link href="/privacy">Datenschutzerklärung</Link>
-                    <Link href="/">&copy; 2025 jiflabs.de</Link>
+                    <Link href="/">&copy; jiflabs.de 2025</Link>
                 </nav>
             </section>
             <section className={styles.links}>

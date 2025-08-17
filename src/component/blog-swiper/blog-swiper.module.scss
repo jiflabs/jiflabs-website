@@ -28,32 +28,3 @@
     }
   }
 }
-
-.slide {
-  width: 100%;
-  height: 100%;
-  background: var(--color-background-2);
-  display: flex;
-  flex-flow: column nowrap;
-  border-radius: 1rem 2rem 1rem 2rem;
-  padding: 2rem 3rem;
-  gap: 2rem;
-
-  div.link {
-    margin-top: auto;
-
-    a {
-      display: inline-block;
-    }
-  }
-
-  @media print {
-    background: none;
-    border-radius: 0;
-    padding: 0;
-
-    div.link {
-      display: none;
-    }
-  }
-}
