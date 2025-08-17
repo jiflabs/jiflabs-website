@@ -1,9 +1,6 @@
 "use client";
 
-import {Article} from "@/content/article";
-import {formatDate} from "@/util/date";
-import Link from "next/link";
-import React from "react";
+import React, {ReactNode} from "react";
 import {A11y, Keyboard, Navigation, Pagination} from "swiper/modules";
 import {Swiper, SwiperSlide} from "swiper/react";
 
@@ -15,24 +12,11 @@ import "swiper/scss/keyboard";
 import "swiper/scss/navigation";
 import "swiper/scss/pagination";
 
-function Slide({id, title, create_date, content}: Article) {
-    return (
-        <Link href={`/blog/${id}`} title={title} className={styles.slide}>
-            <h3>{title}</h3>
-            <time dateTime={new Date(create_date).toISOString()}>
-                {formatDate(create_date)}
-            </time>
-            <div>{`${content.slice(0, 50)}...`}</div>
-            <span className={`link ${styles.link}`}>Weiterlesen</span>
-        </Link>
-    );
-}
-
 type Props = {
-    items: Article[],
+    children: ReactNode[],
 }
 
-export function BlogSwiper({items}: Readonly<Props>) {
+export function BlogSwiper({children}: Readonly<Props>) {
     return (
         <Swiper className={styles.wrapper}
                 slidesPerView={1}
@@ -61,9 +45,9 @@ export function BlogSwiper({items}: Readonly<Props>) {
                 keyboard
                 navigation
                 pagination={{dynamicBullets: true}}>
-            {items.map(item => (
-                <SwiperSlide key={item.id}>
-                    <Slide {...item}/>
+            {children.map((child, index) => (
+                <SwiperSlide key={index}>
+                    {child}
                 </SwiperSlide>
             ))}
         </Swiper>
