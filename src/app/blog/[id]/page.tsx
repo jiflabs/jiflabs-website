@@ -58,7 +58,7 @@ function CommentTreeLevel({tree}: Readonly<CommentTreeLevelProps>) {
 
 export default async function Page({params}: Readonly<Props>) {
     const {id} = await params;
-    const {title, subtitle, create_date, content, _comments} = await getArticleResolvedById(id);
+    const {title, subtitle, create_date, content, _users, _comments} = await getArticleResolvedById(id);
 
     const comment_tree = tree(_comments, "comment_id");
 
@@ -67,9 +67,13 @@ export default async function Page({params}: Readonly<Props>) {
             <div>
                 <h1>{title}</h1>
                 <h2>{subtitle}</h2>
-                <time dateTime={new Date(create_date).toISOString()}>
-                    {formatDate(create_date)}
-                </time>
+                <p>
+                    am&nbsp;
+                    <time dateTime={new Date(create_date).toISOString()}>
+                        {formatDate(create_date)}
+                    </time>
+                    , von {_users.map(user => user.name).join(", ")}
+                </p>
             </div>
             {content}
             <hr/>
