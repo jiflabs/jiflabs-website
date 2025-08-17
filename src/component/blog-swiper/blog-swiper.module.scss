@@ -37,13 +37,25 @@
   flex-flow: column nowrap;
   border-radius: 1rem 2rem 1rem 2rem;
   padding: 2rem 3rem;
-  gap: 2rem;
 
-  div.link {
+  border: 2px solid transparent;
+
+  span.link {
     margin-top: auto;
+    margin-left: auto;
+  }
 
-    a {
-      display: inline-block;
+  &:hover,
+  &:focus-visible,
+  &:active {
+    color: inherit;
+    text-decoration: inherit;
+
+    border-color: var(--color-accent);
+
+    h3,
+    span.link {
+      text-decoration: underline;
     }
   }
 
@@ -52,7 +64,7 @@
     border-radius: 0;
     padding: 0;
 
-    div.link {
+    span.link {
       display: none;
     }
   }

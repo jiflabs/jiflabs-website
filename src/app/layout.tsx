@@ -1,9 +1,9 @@
+import {ErrorBoundary} from "@/component/error/error";
 import Footer from "@/component/footer/footer";
 import Header from "@/component/header/header";
+import {WipBanner} from "@/component/wip-banner/wip-banner";
 
 import {config} from "@fortawesome/fontawesome-svg-core";
-import {faWarning} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 import type {Metadata} from "next";
 import {Fira_Code, Fira_Sans} from "next/font/google";
@@ -45,11 +45,10 @@ export default async function Layout(
         <html lang="de">
         <body className={`${fontFiraSans.className} ${fontFiraCode.variable}`}>
         <Header/>
-        <div className="wip-banner">
-            <FontAwesomeIcon icon={faWarning} size="2xl"/>
-            <span>Warnung: diese Webseite ist noch in Entwicklung, sprich wichtige Information wie die Datenschutzerklärung und das Impressum können unter Umständen noch fehlerhaft oder unvollständig sein.</span>
-        </div>
-        {children}
+        <WipBanner/>
+        <ErrorBoundary>
+            {children}
+        </ErrorBoundary>
         <Footer/>
         </body>
         </html>

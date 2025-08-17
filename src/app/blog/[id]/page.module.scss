@@ -1,0 +1,28 @@
+ul.comment_tree {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1rem;
+
+  list-style: none;
+  margin-bottom: 0;
+
+  li {
+    border-left: 2px solid var(--color-accent);
+    margin-left: 0;
+    padding-left: 1rem;
+  }
+}
+
+.comment_item {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1rem;
+
+  &:has(+ ul) {
+    margin-bottom: 2rem;
+  }
+}
+
+.user_name {
+  font-weight: bold;
+}

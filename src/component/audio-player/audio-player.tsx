@@ -9,33 +9,37 @@ import {
     faVolumeXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {KeyboardEventHandler, useEffect, useRef, useState} from "react";
+
+import {EventHandler, KeyboardEventHandler, SyntheticEvent, useCallback, useEffect, useState} from "react";
 
 import styles from "./audio-player.module.scss";
 
-type SeekEvent<T, C> = {
-    target: T,
-    currentTarget: C,
+interface SeekEvent<T> extends SyntheticEvent<T> {
     key?: string,
 }
 
-type SeekEventHandler<T, C> = (event: SeekEvent<T, C>) => void
+type SeekEventHandler = EventHandler<SeekEvent<HTMLInputElement>>;
 
 function formatSeconds(x: number | undefined): string {
     if (x === undefined)
-        return "0:00";
+        return "-:--";
+
     const minutes = Math.floor(x / 60);
     const seconds = Math.floor(x % 60);
     return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
 }
 
-export default function AudioPlayer({src}: { src: string }) {
-    const audioRef = useRef<HTMLAudioElement>(null);
+type Props = {
+    src: string,
+};
 
-    const mod = (consumer: (audio: HTMLAudioElement) => void) => {
-        if (audioRef.current)
-            consumer(audioRef.current);
-    };
+export default function AudioPlayer({src}: Readonly<Props>) {
+    const [audioRef, setAudioRef] = useState<HTMLAudioElement | null>(null);
+
+    const mod = useCallback((consumer: (audio: HTMLAudioElement) => void) => {
+        if (audioRef !== null)
+            consumer(audioRef);
+    }, [audioRef]);
 
     const [paused, setPaused] = useState<boolean>();
     const [time, setTime] = useState<number>();
@@ -56,10 +60,12 @@ export default function AudioPlayer({src}: { src: string }) {
             setPreVolume(0);
             setMuted(false);
         });
-    }, [audioRef]);
+    }, [mod]);
 
-    const togglePause = () => mod(audio => paused ? audio.play() : audio.pause());
-    const toggleMute = () => mod(audio => {
+    const togglePause = useCallback(() => {
+        mod(audio => paused ? audio.play() : audio.pause());
+    }, [mod, paused]);
+    const toggleMute = useCallback(() => mod(audio => {
         if (muted) {
             audio.volume = (preVolume ?? 100) / 100;
             setMuted(false);
@@ -68,9 +74,9 @@ export default function AudioPlayer({src}: { src: string }) {
             setPreVolume(volume ?? 0);
             setMuted(true);
         }
-    });
+    }), [mod, muted, setMuted, preVolume, setPreVolume, volume]);
 
-    const handleControlsBegin: KeyboardEventHandler<HTMLDivElement> = (event) => {
+    const handleControlsBegin: KeyboardEventHandler<HTMLDivElement> = useCallback(event => {
         if (event.target !== event.currentTarget)
             return;
         switch (event.key) {
@@ -84,12 +90,12 @@ export default function AudioPlayer({src}: { src: string }) {
                 break;
             case "ArrowDown":
                 event.preventDefault();
-                mod(audio => audio.volume = Math.max(muted ? preVolume! / 100 : audio.volume - 0.1, 0));
+                mod(audio => audio.volume = Math.max(muted ? preVolume! / 100 : audio.volume - 0.01, 0));
                 setMuted(false);
                 break;
             case "ArrowUp":
                 event.preventDefault();
-                mod(audio => audio.volume = Math.min(muted ? preVolume! / 100 : audio.volume + 0.1, 1));
+                mod(audio => audio.volume = Math.min(muted ? preVolume! / 100 : audio.volume + 0.01, 1));
                 setMuted(false);
                 break;
             case "ArrowLeft":
@@ -129,9 +135,9 @@ export default function AudioPlayer({src}: { src: string }) {
                 });
                 break;
         }
-    };
+    }, [togglePause, toggleMute, mod, muted, setMuted, preVolume]);
 
-    const handleControlsEnd: KeyboardEventHandler<HTMLDivElement> = (event) => {
+    const handleControlsEnd: KeyboardEventHandler<HTMLDivElement> = useCallback(event => {
         if (event.target !== event.currentTarget)
             return;
         switch (event.key) {
@@ -144,33 +150,41 @@ export default function AudioPlayer({src}: { src: string }) {
                 mod(audio => audio.play());
                 break;
         }
-    };
+    }, [mod]);
 
-    const handleSeekBegin: SeekEventHandler<EventTarget, EventTarget & HTMLInputElement> = (
-        {
-            target,
-            currentTarget,
-            key,
-        },
-    ) => {
-        if (target === currentTarget && (key === undefined || key === "ArrowUp" || key === "ArrowDown" || key === "ArrowLeft" || key === "ArrowRight"))
-            mod(audio => audio.pause());
-    };
+    const handleSeekBegin: SeekEventHandler = useCallback(event => {
+        if (event.target !== event.currentTarget)
+            return;
+        switch (event.key) {
+            case undefined:
+            case "ArrowUp":
+            case "ArrowDown":
+            case "ArrowLeft":
+            case "ArrowRight":
+                event.preventDefault();
+                mod(audio => audio.pause());
+                break;
+        }
+    }, [mod]);
 
-    const handleSeekEnd: SeekEventHandler<EventTarget, EventTarget & HTMLInputElement> = (
-        {
-            target,
-            currentTarget,
-            key,
-        },
-    ) => {
-        if (target === currentTarget && (key === undefined || key === "ArrowUp" || key === "ArrowDown" || key === "ArrowLeft" || key === "ArrowRight"))
-            mod(audio => audio.play());
-    };
+    const handleSeekEnd: SeekEventHandler = useCallback(event => {
+        if (event.target !== event.currentTarget)
+            return;
+        switch (event.key) {
+            case undefined:
+            case "ArrowUp":
+            case "ArrowDown":
+            case "ArrowLeft":
+            case "ArrowRight":
+                event.preventDefault();
+                mod(audio => audio.play());
+                break;
+        }
+    }, [mod]);
 
     return (
         <div title="Audio-Player">
-            <audio ref={audioRef}
+            <audio ref={setAudioRef}
                    src={src}
                    preload="none"
                    onPlay={() => setPaused(false)}
@@ -188,7 +202,6 @@ export default function AudioPlayer({src}: { src: string }) {
                  onKeyUp={handleControlsEnd}>
                 <div className={styles.left}>
                     <button onClick={togglePause} title={paused ? "Fortsetzen" : "Pausieren"}>
-                        <span>{paused ? "Fortsetzen" : "Pausieren"}</span>
                         <FontAwesomeIcon icon={paused ? faPlay : faPause} size="lg"/>
                     </button>
                     <label className={styles.playback}>
@@ -217,7 +230,6 @@ export default function AudioPlayer({src}: { src: string }) {
                 </div>
                 <div className={styles.right}>
                     <button onClick={toggleMute} title={muted ? "Lautschalten" : "Stummschalten"}>
-                        <span>{muted ? "Lautschalten" : "Stummschalten"}</span>
                         <FontAwesomeIcon icon={
                             muted
                                 ? faVolumeXmark
@@ -233,7 +245,7 @@ export default function AudioPlayer({src}: { src: string }) {
                         <input type="range"
                                min={0}
                                max={100}
-                               step={10}
+                               step={1}
                                value={volume ?? 0}
                                onChange={event => mod(audio => {
                                    if (muted) {
