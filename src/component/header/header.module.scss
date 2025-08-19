@@ -54,22 +54,20 @@ a.home {
   }
 }
 
-div.right {
+nav.right {
   flex-shrink: 0;
 
-  div {
-    button {
-      display: none;
-    }
+  button {
+    display: none;
+  }
 
-    @media (max-width: 767px) {
-      button {
-        display: unset;
-      }
+  @media (max-width: 767px) {
+    button {
+      display: unset;
     }
   }
 
-  nav ul {
+  ul {
     display: flex;
     flex-flow: row nowrap;
     justify-content: flex-end;
@@ -91,16 +89,15 @@ div.right {
     flex-flow: column nowrap;
     align-items: flex-end;
 
-    &.close {
-      nav ul {
-        display: none;
-      }
+    ul {
+      display: none;
     }
 
     &.open {
       gap: 1rem;
 
-      nav ul {
+      ul {
+        display: flex;
         flex-flow: column nowrap;
         align-items: flex-end;
       }

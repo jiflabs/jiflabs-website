@@ -1,0 +1,48 @@
+ul.comment_tree {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1rem;
+
+  list-style: none;
+  margin-bottom: 0;
+
+  border-left: 2px solid var(--color-background-3);
+  border-bottom: 2px solid var(--color-background-3);
+
+  li {
+    margin-left: 0;
+
+    padding-left: 1rem;
+    padding-bottom: 1rem;
+  }
+}
+
+ul.comment_tree.close {
+  display: none;
+}
+
+.comment_item {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1rem;
+
+  &:has(+ ul) {
+    margin-bottom: 2rem;
+  }
+}
+
+.user_name {
+  font-weight: bold;
+}
+
+button.toggle {
+  background: none;
+
+  border-radius: 25%;
+  padding: 0.5rem;
+  margin: 1rem 0 0;
+}
+
+button.toggle:has(+ .comment_tree:not(.close)) {
+  margin: 1rem 0;
+}
