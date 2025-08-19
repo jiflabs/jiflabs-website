@@ -8,25 +8,31 @@ export default async function Footer() {
             <section className={styles.links}>
                 <p>Essentiell</p>
                 <nav>
-                    <Link href="/imprint">Impressum</Link>
-                    <Link href="/privacy">Datenschutzerklärung</Link>
-                    <Link href="/">&copy; jiflabs.de 2025</Link>
+                    <ul>
+                        <li><Link href="/imprint">Impressum</Link></li>
+                        <li><Link href="/privacy">Datenschutzerklärung</Link></li>
+                        <li><Link href="/">&copy; jiflabs.de 2025</Link></li>
+                    </ul>
                 </nav>
             </section>
             <section className={styles.links}>
                 <p>Foo</p>
                 <nav>
-                    <Link href="/editor">Markdown Editor</Link>
-                    <Link href="/">Bar 2</Link>
-                    <Link href="/">Bar 3</Link>
+                    <ul>
+                        <li><Link href="/editor">Markdown Editor</Link></li>
+                        <li><Link href="/">Bar 2</Link></li>
+                        <li><Link href="/">Bar 3</Link></li>
+                    </ul>
                 </nav>
             </section>
             <section className={styles.links}>
                 <p>Links</p>
                 <nav>
-                    <Link href="/">Link 1</Link>
-                    <Link href="/">Link 2</Link>
-                    <Link href="/">Link 3</Link>
+                    <ul>
+                        <li><Link href="/">Link 1</Link></li>
+                        <li><Link href="/">Link 2</Link></li>
+                        <li><Link href="/">Link 3</Link></li>
+                    </ul>
                 </nav>
             </section>
         </footer>

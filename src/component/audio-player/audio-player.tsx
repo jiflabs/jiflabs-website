@@ -156,12 +156,14 @@ export default function AudioPlayer({src}: Readonly<Props>) {
         if (event.target !== event.currentTarget)
             return;
         switch (event.key) {
-            case undefined:
             case "ArrowUp":
             case "ArrowDown":
             case "ArrowLeft":
             case "ArrowRight":
                 event.preventDefault();
+                mod(audio => audio.pause());
+                break;
+            case undefined:
                 mod(audio => audio.pause());
                 break;
         }
@@ -171,12 +173,14 @@ export default function AudioPlayer({src}: Readonly<Props>) {
         if (event.target !== event.currentTarget)
             return;
         switch (event.key) {
-            case undefined:
             case "ArrowUp":
             case "ArrowDown":
             case "ArrowLeft":
             case "ArrowRight":
                 event.preventDefault();
+                mod(audio => audio.play());
+                break;
+            case undefined:
                 mod(audio => audio.play());
                 break;
         }
