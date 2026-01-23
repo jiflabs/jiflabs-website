@@ -6,11 +6,11 @@ import {Swiper, SwiperSlide} from "swiper/react";
 
 import styles from "./blog-swiper.module.scss";
 
-import "swiper/scss";
-import "swiper/scss/a11y";
-import "swiper/scss/keyboard";
-import "swiper/scss/navigation";
-import "swiper/scss/pagination";
+import "swiper/css";
+import "swiper/css/a11y";
+import "swiper/css/keyboard";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 type Props = {
     children: ReactNode[],

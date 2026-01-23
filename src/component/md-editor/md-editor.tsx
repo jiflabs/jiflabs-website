@@ -21,14 +21,14 @@ import styles from "./md-editor.module.scss";
 
 type InputProps = {
     children?: ReactNode,
-    message?: ReactNode,
+    tooltip?: ReactNode,
 } & DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 
-function Input({children, message, ...props}: InputProps) {
+function Input({children, tooltip, ...props}: InputProps) {
     return (
         <label>
             <strong>{children}</strong>
-            {message ? <span>{message}</span> : undefined}
+            {tooltip ? <span>{tooltip}</span> : undefined}
             <input {...props}/>
         </label>
     );
@@ -57,9 +57,6 @@ export type Data = {
 export default function MDEditor({onSubmitAction}: { onSubmitAction: (data: Data) => Promise<Status> }) {
 
     const [status, setStatus] = useState<Status | null | undefined>();
-    const [title, setTitle] = useState<string>("");
-    const [tags, setTags] = useState<string>("");
-    const [category, setCategory] = useState<string>("");
     const [content, setContent] = useState<string>("");
     const [images, setImages] = useState<Image[]>([]);
 
@@ -71,10 +68,12 @@ export default function MDEditor({onSubmitAction}: { onSubmitAction: (data: Data
 
         setStatus(null);
 
+        const formData = new FormData(event.currentTarget);
+
         const data: Data = {
-            title,
-            tags: tags.split(/\s+/),
-            category,
+            title: formData.get("title")! as string,
+            tags: formData.has("tags") ? (formData.get("tags")! as string).split(/\s+/) : [],
+            category: formData.has("category") ? formData.get("category")! as string : "",
             content,
             date: new Date(),
             images,
@@ -113,26 +112,11 @@ export default function MDEditor({onSubmitAction}: { onSubmitAction: (data: Data
         <div className={styles.wrapper}>
             <section className={styles.editor}>
                 <form onSubmit={handleSubmit}>
-                    <Input type="text"
-                           placeholder="Titel"
-                           required
-                           onChange={({currentTarget}) => setTitle(currentTarget.value)}>
-                        Titel
-                    </Input>
-                    <Input type="text"
-                           placeholder="Tags"
-                           required
-                           onChange={({currentTarget}) => setTags(currentTarget.value)}>
-                        Tags
-                    </Input>
-                    <Input type="text"
-                           placeholder="Kategorie"
-                           required
-                           onChange={({currentTarget}) => setCategory(currentTarget.value)}>
-                        Kategorie
-                    </Input>
+                    <Input type="text" placeholder="Titel" required>Titel</Input>
+                    <Input type="text" placeholder="Tags">Tags</Input>
+                    <Input type="text" placeholder="Kategorie">Kategorie</Input>
                     <Input type="file"
-                           message="Dateien anfügen"
+                           tooltip="Dateien anfügen"
                            accept="image/*"
                            multiple
                            onChange={handleImagesChange}>

@@ -1,16 +1,13 @@
 "use client";
 
-import favicon from "@/asset/favicon.svg";
-
 import {faBars, faClose} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-
-import Image from "next/image";
 import Link from "next/link";
 
 import {useState} from "react";
 
 import styles from "./header.module.scss";
+import {ReactSVG} from "react-svg";
 
 export default function Header() {
     const [open, setOpen] = useState<boolean>(false);
@@ -18,7 +15,7 @@ export default function Header() {
     return (
         <header className={`${styles.header}`}>
             <Link href="/" className={styles.home}>
-                <Image src={favicon} alt="" className={styles.home} priority/>
+                <ReactSVG src="/favicon.svg" className={styles.home}/>
                 Startseite
             </Link>
             <nav className={`${styles.right} ${open ? styles.open : ""}`}>
