@@ -1,7 +1,5 @@
 "use client";
 
-import favicon from "@/asset/favicon.svg";
-
 import {faBars, faClose} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
@@ -18,7 +16,7 @@ export default function Header() {
     return (
         <header className={`${styles.header}`}>
             <Link href="/" className={styles.home}>
-                <Image src={favicon} alt="" className={styles.home} priority/>
+                <Image src="/favicon.svg" width={64} height={64} alt="" className={styles.home} priority/>
                 Startseite
             </Link>
             <nav className={`${styles.right} ${open ? styles.open : ""}`}>

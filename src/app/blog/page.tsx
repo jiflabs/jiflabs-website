@@ -17,15 +17,17 @@ async function Slide({id, title, create_date, content}: Article) {
     const {items: users} = await getUsersByArticleId(id);
 
     return (
-        <Link href={`/blog/${id}`} title={title} className={styles.slide}>
-            <h3>{title}</h3>
+        <div className={styles.slide}>
+            <Link href={`/blog/${id}`} title={title}>
+                <h3>{title}</h3>
+            </Link>
             <time dateTime={new Date(create_date).toISOString()}>
                 {formatDate(create_date)}
             </time>
             <span>von {users.map(user => user.name).join(", ")}</span>
             <span className={styles.content}>{`${content.slice(0, 50)}...`}</span>
             <span className={`link ${styles.link}`}>Weiterlesen</span>
-        </Link>
+        </div>
     );
 }
 

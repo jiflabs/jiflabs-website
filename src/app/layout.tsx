@@ -1,3 +1,7 @@
+import "./globals.scss";
+
+import "@fortawesome/fontawesome-svg-core/styles.css";
+
 import {ErrorBoundary} from "@/component/error/error";
 import Footer from "@/component/footer/footer";
 import Header from "@/component/header/header";
@@ -10,15 +14,12 @@ import {Fira_Code, Fira_Sans} from "next/font/google";
 
 import type {ReactNode} from "react";
 
-import "./globals.scss";
-
-import "@fortawesome/fontawesome-svg-core/styles.css";
-
 config.autoAddCss = false;
 
 const fontFiraCode = Fira_Code({
     variable: "--font-fira-code",
     subsets: ["latin", "latin-ext"],
+    weight: ["300", "400", "500", "600", "700"],
 });
 
 const fontFiraSans = Fira_Sans({
